@@ -58,4 +58,21 @@
       header.classList.toggle('scrolled', window.scrollY > 80);
     });
   }
+
+  // Mobil: sabit CTA (Hemen Ara / WhatsApp) ilk yüklemede gizli, kaydırma başlayınca göster
+  var fixedCta = document.querySelector('.fixed-cta');
+  var mobileCta = window.matchMedia('(max-width: 900px)');
+  if (fixedCta && mobileCta.matches) {
+    var onScrollShowCta = function () {
+      if (window.scrollY > 30) {
+        fixedCta.classList.add('fixed-cta--visible');
+        window.removeEventListener('scroll', onScrollShowCta);
+        window.removeEventListener('touchmove', onScrollShowCta);
+      }
+    };
+    window.addEventListener('scroll', onScrollShowCta, { passive: true });
+    window.addEventListener('touchmove', onScrollShowCta, { passive: true });
+  } else if (fixedCta && !mobileCta.matches) {
+    fixedCta.classList.add('fixed-cta--visible');
+  }
 })();
