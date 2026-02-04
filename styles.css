@@ -1206,9 +1206,18 @@ body {
 /* İletişim: Telefon ve WhatsApp buton olarak */
 .contact-buttons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
+}
+
+.contact-buttons .contact-link--btn {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact-link--btn {
@@ -1763,6 +1772,22 @@ body {
   align-items: center;
 }
 
+/* İletişim sayfası: Hemen arayın / WhatsApp butonları eşit ve yan yana */
+.contact-page .contact-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+}
+
+.contact-page .contact-buttons .contact-link--btn {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .contact-page__subtitle {
   font-family: var(--font-display);
   font-size: 1.5rem;
@@ -2027,9 +2052,20 @@ body {
 
 /* ========== Responsive ========== */
 @media (max-width: 900px) {
+  .hero {
+    padding: 3.5rem 0 0.75rem;
+    min-height: auto;
+  }
+
+  .hero .container--wide.hero-inner,
+  .hero .container--wide.hero-pillars {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 1rem;
     text-align: center;
   }
 
@@ -2037,35 +2073,69 @@ body {
     max-width: none;
     align-items: center;
     text-align: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
   }
 
   .hero-lead {
     max-width: none;
+    font-size: 0.95rem;
+    line-height: 1.5;
   }
 
   .hero-actions {
     justify-content: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100%;
+    gap: 0.75rem;
+  }
+
+  .hero-actions__btn {
+    flex: 1 1 0;
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 0.75rem;
+    font-size: 0.85rem;
   }
 
   .hero-visual {
     order: -1;
-    min-height: 300px;
+    min-height: 200px;
+    width: 100%;
   }
 
   .hero-visual-inner {
-    max-width: 380px;
+    max-width: 100%;
+    width: 100%;
     height: auto;
     margin: 0 auto;
+    gap: 1rem;
   }
 
   .hero-pillars {
-    padding: 2.5rem 1rem 2.5rem;
-    gap: 0.75rem;
+    padding: 1rem 0 1.5rem;
+    gap: 0.6rem;
   }
 
   .hero-pillar {
-    padding: 0.7rem 1.1rem;
-    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-scroll {
+    bottom: 0.75rem;
   }
 
   .nav {
@@ -2201,24 +2271,26 @@ body {
     font-size: clamp(1.4rem, 4vw, 1.85rem);
   }
 
-  .comparison-row {
-    grid-template-columns: 1fr;
-  }
-
-  .comparison-header .col-method:first-child,
-  .col-method.accent {
-    border-left: none;
-    border-top: 1px solid var(--color-border);
+  /* Karşılaştırma tablosu mobilde yan yana kalsın, sığsın */
+  .comparison-table {
+    max-width: 100%;
+    font-size: 0.95rem;
   }
 
   .comparison-header .col-method {
-    padding: 1.25rem 1rem;
-    font-size: 1.1rem;
+    padding: 0.75rem 0.6rem;
+    font-size: 0.9rem;
   }
 
   .col-method {
-    padding: 1.25rem 1rem;
-    font-size: 1.05rem;
+    padding: 0.7rem 0.6rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+
+  .comparison-header .col-method.accent {
+    font-size: 0.9rem;
   }
 
   .service-card {
@@ -2238,9 +2310,66 @@ body {
     font-size: 0.9rem;
   }
 
+  .hero .container--wide.hero-inner,
+  .hero .container--wide.hero-pillars {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
   .hero-visual-inner {
-    max-width: 320px;
+    max-width: 100%;
+    width: 100%;
     height: auto;
+    gap: 0.75rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .hero-actions__btn {
+    font-size: 0.8rem;
+    padding: 0.65rem 0.5rem;
+  }
+
+  .hero-actions__btn .btn-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hero {
+    padding: 3rem 0 0.5rem;
+  }
+
+  .hero-content {
+    gap: 0.85rem;
+  }
+
+  .hero-pillars {
+    padding: 0.75rem 0 1.25rem;
+  }
+
+  .hero-pillar {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  .comparison-table {
+    font-size: 0.8rem;
+  }
+
+  .comparison-header .col-method {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.8rem;
+  }
+
+  .col-method {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .comparison-header .col-method.accent {
+    font-size: 0.8rem;
   }
 
   .section {
