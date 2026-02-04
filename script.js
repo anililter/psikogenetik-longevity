@@ -59,20 +59,27 @@
     });
   }
 
-  // Mobil: sabit CTA (Hemen Ara / WhatsApp) ilk yüklemede gizli, kaydırma başlayınca göster
+  // Mobil: sabit CTA hero bölgesindeyken gizli, aşağı kaydırınca çık, en üste dönünce tekrar gizlensin
   var fixedCta = document.querySelector('.fixed-cta');
   var mobileCta = window.matchMedia('(max-width: 900px)');
-  if (fixedCta && mobileCta.matches) {
-    var onScrollShowCta = function () {
-      if (window.scrollY > 30) {
+  var CTA_SCROLL_THRESHOLD = 120;
+
+  function updateFixedCtaVisibility() {
+    if (!fixedCta) return;
+    if (mobileCta.matches) {
+      if (window.scrollY > CTA_SCROLL_THRESHOLD) {
         fixedCta.classList.add('fixed-cta--visible');
-        window.removeEventListener('scroll', onScrollShowCta);
-        window.removeEventListener('touchmove', onScrollShowCta);
+      } else {
+        fixedCta.classList.remove('fixed-cta--visible');
       }
-    };
-    window.addEventListener('scroll', onScrollShowCta, { passive: true });
-    window.addEventListener('touchmove', onScrollShowCta, { passive: true });
-  } else if (fixedCta && !mobileCta.matches) {
-    fixedCta.classList.add('fixed-cta--visible');
+    } else {
+      fixedCta.classList.add('fixed-cta--visible');
+    }
+  }
+
+  if (fixedCta) {
+    updateFixedCtaVisibility();
+    window.addEventListener('scroll', updateFixedCtaVisibility, { passive: true });
+    mobileCta.addEventListener('change', updateFixedCtaVisibility);
   }
 })();
