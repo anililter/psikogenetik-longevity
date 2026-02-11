@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psikogenetik Uyum Testi | 10 Soruluk İnteraktif Anket | P&amp;L</title>
+  <meta name="description" content="Partner dinamiklerini psikolojik örüntüler ve genetik yatkınlık ekseninde değerlendiren 10 soruluk psikogenetik uyum anketi. Kişiselleştirilmiş öneriler.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+  <header class="header">
+    <div class="container container--wide header-inner">
+      <a href="index.html" class="logo">P&amp;L</a>
+      <nav class="nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="calisma-alanlarim.html">Çalışma Alanlarımız</a>
+        <a href="terapi-hizmetleri.html">Terapi Hizmetleri</a>
+        <a href="psikogenetik.html">Psikogenetik</a>
+        <a href="farkimiz.html">Farkımız</a>
+        <a href="interaktif-testler.html">İnteraktif Testler</a>
+        <a href="iletisim.html">İletişim</a>
+      </nav>
+      <div class="header-ctas">
+        <a href="tel:+905454201468" class="btn btn-primary">Hemen arayın</a>
+        <a href="https://wa.me/905454201468" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp Randevu</a>
+      </div>
+      <button class="menu-toggle" aria-label="Menü">☰</button>
+    </div>
+  </header>
+
+  <main class="page page-quiz">
+    <section class="page-hero page-hero--about">
+      <div class="page-hero__bg" aria-hidden="true"></div>
+      <div class="container">
+        <p class="page-hero__label">İnteraktif içerik</p>
+        <h1 class="page-hero__title">Psikogenetik Uyum Testi</h1>
+        <p class="page-hero__lead">İlişkini veriyle oku — 10 soruluk ölçek ile psikogenetik uyum profilin ve kişiselleştirilmiş öneriler.</p>
+      </div>
+    </section>
+
+    <div class="quiz-wrap">
+      <section class="quiz-box quiz-hero">
+        <h2 class="visually-hidden">Giriş</h2>
+        <p>Bu interaktif anket, partner dinamiklerini psikolojik örüntüler ve genetik yatkınlık ekseninde değerlendirmen için tasarlandı.</p>
+        <div class="quiz-chips">
+          <span class="quiz-chip">10 soruluk ölçek</span>
+          <span class="quiz-chip">Psikogenetik boyutlar</span>
+          <span class="quiz-chip">Uyumluluk analizi</span>
+          <span class="quiz-chip">Kişiselleştirilmiş öneriler</span>
+        </div>
+      </section>
+
+      <article class="quiz-box quiz-article">
+        <h2>Genetik Yatkınlık ve İlişki Uyumu Neden Birlikte Değerlendirilir?</h2>
+        <p>İlişkilerde çatışma, bağlanma, stres toleransı ve ödül arayışı gibi süreçler yalnızca öğrenilmiş davranışlardan değil, biyolojik yatkınlıklardan da etkilenebilir. Psikogenetik yaklaşım, bu yatkınlıkları ilişki davranışlarıyla birlikte yorumlar.</p>
+        <p>Literatürde özellikle serotonin taşıyıcı sistemi (SLC6A4), dopaminerjik ödül devreleri (DRD2/DRD4), stres yanıt düzeni (COMT, FKBP5) ve sosyal bağlanma ekseni (OXTR) gibi alanlarla ilişkilendirilen bulgular öne çıkar. Bu ilişkiler tek başına kader belirlemez; çevre, travma öyküsü, iletişim stili ve psikoeğitim düzeyi sonucu ciddi biçimde değiştirir.</p>
+        <p>Aşağıdaki 10 soruluk tarama; ilişkideki örüntüleri puanlayarak sana bir “psikogenetik uyum profili” üretir. Çıktı, klinik değerlendirme yerine geçmez; ancak hangi alanda çalışman gerektiğini netleştirir.</p>
+        <div class="quiz-note">
+          En doğru kişiselleştirme, yalnızca akredite laboratuvarlarda yapılan genetik test sonuçları psikolojik değerlendirme ile birlikte uzman tarafından yorumlandığında elde edilir. Bu anket, genetik özellikler üzerine kurgulanmış örnek bir tarama modelidir; genetik test yapılmadan kesin bir sonuca varılamaz.
+        </div>
+      </article>
+
+      <section class="quiz-box quiz-section">
+        <h2>10 Soruluk Psikogenetik Uyum Anketi</h2>
+        <div class="quiz-progress-row">
+          <span id="progressText">Soru 1/10</span>
+          <span id="doneText">Yanıtlanan: 0</span>
+        </div>
+        <div class="quiz-bar"><div class="quiz-bar-inner" id="barIn"></div></div>
+
+        <div class="quiz-card">
+          <div class="quiz-q-meta" id="qMeta"></div>
+          <p class="quiz-q-text" id="qText"></p>
+          <div class="quiz-opts" id="opts"></div>
+          <div class="quiz-legend">
+            <span>1 = Hiç katılmıyorum</span>
+            <span>5 = Tamamen katılıyorum</span>
+          </div>
+          <div class="quiz-warn" id="warn"></div>
+        </div>
+
+        <div class="quiz-actions">
+          <button type="button" class="btn btn-ghost" id="prevBtn">Geri</button>
+          <button type="button" class="btn btn-primary" id="nextBtn">İleri</button>
+        </div>
+      </section>
+
+      <section class="quiz-box quiz-result" id="resultBox">
+        <h2>Analiz Sonucu</h2>
+        <p id="intro">Tüm soruları tamamladığında psikogenetik uyum analizin burada oluşacak.</p>
+        <div id="body"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a href="index.html" class="footer__logo">P&amp;L</a>
+            <p class="footer__tagline">Psikogenetik & Longevity — Genetik temelli psikoterapi ve yaşam danışmanlığı.</p>
+          </div>
+          <nav class="footer__nav" aria-label="Sayfa içi bağlantılar">
+            <p class="footer__nav-title">Sayfalar</p>
+            <ul class="footer__links">
+              <li><a href="index.html">Ana Sayfa</a></li>
+              <li><a href="hakkimizda.html">Hakkımızda</a></li>
+              <li><a href="calisma-alanlarim.html">Çalışma Alanlarımız</a></li>
+              <li><a href="terapi-hizmetleri.html">Terapi Hizmetleri</a></li>
+              <li><a href="psikogenetik.html">Psikogenetik</a></li>
+              <li><a href="farkimiz.html">Farkımız</a></li>
+              <li><a href="interaktif-testler.html">İnteraktif Testler</a></li>
+              <li><a href="iletisim.html">İletişim</a></li>
+            </ul>
+          </nav>
+          <div class="footer__contact">
+            <p class="footer__nav-title">İletişim</p>
+            <div class="footer__contact-buttons">
+              <a href="tel:+905454201468" class="btn btn-primary">Hemen arayın</a>
+              <a href="https://wa.me/905454201468" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <p class="footer__address">Merdivenköy Mh. Fahrettin Kerim Gökay Cd. 169<br>Çeviköz Apt. K:5 D:11, 34710 Kadıköy / İstanbul</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p class="footer__legal"><a href="#">KVKK Metni</a></p>
+        <p class="footer__copy">© 2025 P&amp;L — Psikogenetik & Longevity</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="fixed-cta" aria-label="İletişim">
+    <a href="tel:+905454201468" class="fixed-cta__btn fixed-cta__call" aria-label="Hemen ara">📞 <span>Hemen Ara</span></a>
+    <a href="https://wa.me/905454201468" class="fixed-cta__btn fixed-cta__whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp ile randevu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span>WhatsApp Randevu</span>
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+  (function() {
+    var quiz = [
+      { d: "Stres reaktivitesi", t: "Yoğun tartışmalarda bedenim hızla alarma geçer (çarpıntı, kasılma, donma)." },
+      { d: "Stres reaktivitesi", t: "Partnerimle kriz anlarında sakinleşmem uzun sürer." },
+      { d: "Ödül hassasiyeti", t: "İlişkide ani heyecan arayışı bazen uzun vadeli güvenin önüne geçer." },
+      { d: "Ödül hassasiyeti", t: "Duygusal iniş-çıkışlar, rutin ve istikrardan daha çekici gelebiliyor." },
+      { d: "Bağlanma düzeni", t: "Yakınlık arttığında kaygı veya geri çekilme eğilimi yaşayabiliyorum." },
+      { d: "Bağlanma düzeni", t: "Partnerimin mesafesi, düşündüğümden daha yoğun terk edilme korkusu tetikliyor." },
+      { d: "Empati ve mentalizasyon", t: "Tartışma sırasında partnerimin niyetini okumakta sık zorlanıyorum." },
+      { d: "Empati ve mentalizasyon", t: "Farklı bakış açılarını görmeden hızlı yargıya varabiliyorum." },
+      { d: "Dürtü ve öz-denetim", t: "Gerilim anında düşünmeden kırıcı söz söyleyebiliyorum." },
+      { d: "Dürtü ve öz-denetim", t: "Konuşmayı ertelemek yerine anlık tepki vermek ilişkiyi zorlaştırıyor." }
+    ];
+    var labels = ["1<br>Hiç", "2<br>Az", "3<br>Orta", "4<br>Çok", "5<br>Tam"];
+    var answers = Array(quiz.length).fill(null);
+    var i = 0;
+
+    var qMeta = document.getElementById("qMeta");
+    var qText = document.getElementById("qText");
+    var opts = document.getElementById("opts");
+    var warn = document.getElementById("warn");
+    var progressText = document.getElementById("progressText");
+    var doneText = document.getElementById("doneText");
+    var barIn = document.getElementById("barIn");
+    var intro = document.getElementById("intro");
+    var body = document.getElementById("body");
+    var prevBtn = document.getElementById("prevBtn");
+    var nextBtn = document.getElementById("nextBtn");
+
+    function putAnswer(v) {
+      answers[i] = v;
+      try { localStorage.setItem("psikogenetik_uyum_answers", JSON.stringify(answers)); } catch (e) {}
+      draw();
+    }
+
+    function draw() {
+      qMeta.textContent = "Boyut: " + quiz[i].d;
+      qText.textContent = quiz[i].t;
+      progressText.textContent = "Soru " + (i + 1) + "/" + quiz.length;
+      var done = answers.filter(function(x) { return x != null; }).length;
+      doneText.textContent = "Yanıtlanan: " + done;
+      barIn.style.width = (done / quiz.length) * 100 + "%";
+      prevBtn.disabled = i === 0;
+      nextBtn.textContent = i === quiz.length - 1 ? "Analizi Oluştur" : "İleri";
+
+      opts.innerHTML = labels.map(function(l, idx) {
+        var val = idx + 1;
+        var active = answers[i] === val ? " active" : "";
+        return "<label class=\"quiz-opt" + active + "\"><input type=\"radio\" " + (answers[i] === val ? "checked" : "") + " /><span>" + l + "</span></label>";
+      }).join("");
+
+      [].slice.call(opts.querySelectorAll(".quiz-opt")).forEach(function(el, idx) {
+        el.addEventListener("click", function() { putAnswer(idx + 1); });
+      });
+    }
+
+    function badge(total) {
+      if (total <= 24) return { cls: "quiz-badge--ok", text: "Yüksek Uyum Potansiyeli", note: "Risk düşük, düzenleme kapasitesi iyi." };
+      if (total <= 37) return { cls: "quiz-badge--mid", text: "Orta Uyum / Geliştirilebilir", note: "Bazı biyopsikolojik alanlarda hedefli çalışma gerekli." };
+      return { cls: "quiz-badge--high", text: "Yüksek Zorlanma Riski", note: "Yüksek stres-reaktivite ve öz-denetim alanlarında destek öncelikli." };
+    }
+
+    function avg(a, b) {
+      var s = answers.slice(a, b);
+      return (s.reduce(function(x, y) { return x + y; }, 0) / s.length).toFixed(2);
+    }
+
+    function render() {
+      if (answers.some(function(x) { return x == null; })) {
+        warn.textContent = "Analiz için tüm sorular yanıtlanmalı.";
+        return;
+      }
+      var total = answers.reduce(function(x, y) { return x + y; }, 0);
+      var b = badge(total);
+      var dims = [
+        { n: "Stres reaktivitesi", v: Number(avg(0, 2)) },
+        { n: "Ödül hassasiyeti", v: Number(avg(2, 4)) },
+        { n: "Bağlanma düzeni", v: Number(avg(4, 6)) },
+        { n: "Empati/mentalizasyon", v: Number(avg(6, 8)) },
+        { n: "Dürtü ve öz-denetim", v: Number(avg(8, 10)) }
+      ];
+      var top2 = dims.slice().sort(function(x, y) { return y.v - x.v; }).slice(0, 2).map(function(x) { return x.n; }).join(" + ");
+
+      intro.innerHTML = "<span class=\"quiz-badge " + b.cls + "\">" + b.text + "</span> Toplam skor: <strong>" + total + "/50</strong> — " + b.note;
+      body.innerHTML =
+        "<div class=\"quiz-result-grid\">" +
+        dims.map(function(d) { return "<div class=\"quiz-result-card\"><strong>" + d.n + "</strong><br>Ortalama: <strong>" + d.v + "/5</strong></div>"; }).join("") +
+        "</div>" +
+        "<p><strong>Öncelikli çalışma alanları:</strong> " + top2 + "</p>" +
+        "<p><strong>Kişiselleştirilmiş öneri:</strong> 8 haftalık iletişim ve regülasyon planı kur. Haftalık çift check-in'i, tetikleyici günlüğü, 20 dakikalık çatışma molası ve sınır cümleleri ile uygula.</p>" +
+        "<p><strong>Genetik test entegrasyonu:</strong> Bu anket genetik özellikler üzerine kurgulanmış örnek bir modeldir. Akredite bir genetik panel sonucu uzman psikolojik görüşme ile birlikte değerlendirildiğinde daha isabetli kişiselleştirme sağlar; genetik test yapılmadan kesin sonuca varılamaz.</p>" +
+        "<p class=\"quiz-result-foot\">Bu anket tanı koymaz. Klinik kararlar için psikolog/psikiyatrist ve uygun genetik danışmanlık birlikte değerlendirme yapmalıdır.</p>" +
+        "<div class=\"quiz-result-cta\">" +
+        "<p class=\"quiz-result-cta__title\">Sonuçlar hakkında konuşmak ister misiniz?</p>" +
+        "<p class=\"quiz-result-cta__lead\">Randevu ve bilgi için bizi arayın veya WhatsApp ile yazın.</p>" +
+        "<div class=\"quiz-result-cta__buttons\">" +
+        "<a href=\"tel:+905454201468\" class=\"btn btn-primary\">📞 0545 420 14 68</a>" +
+        "<a href=\"https://wa.me/905454201468\" class=\"btn btn-whatsapp\" target=\"_blank\" rel=\"noopener\">WhatsApp ile yaz</a>" +
+        "</div></div>";
+
+      document.getElementById("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function hydrate() {
+      try {
+        var saved = JSON.parse(localStorage.getItem("psikogenetik_uyum_answers"));
+        if (Array.isArray(saved) && saved.length === quiz.length) {
+          saved.forEach(function(v, idx) {
+            if ([1, 2, 3, 4, 5].indexOf(v) !== -1) answers[idx] = v;
+          });
+        }
+      } catch (e) {}
+    }
+
+    prevBtn.addEventListener("click", function() {
+      if (i > 0) { i -= 1; draw(); }
+    });
+
+    nextBtn.addEventListener("click", function() {
+      if (answers[i] == null) {
+        warn.textContent = "Bu soruyu puanlayarak devam edebilirsin.";
+        return;
+      }
+      warn.textContent = "";
+      if (i < quiz.length - 1) {
+        i += 1;
+        draw();
+      } else {
+        render();
+      }
+    });
+
+    hydrate();
+    draw();
+    if (answers.every(function(x) { return x != null; })) render();
+  })();
+  </script>
+</body>
+</html>
