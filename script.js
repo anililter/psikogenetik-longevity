@@ -25,31 +25,7 @@
     });
   });
 
-  // Contact form submit (front-end only; backend eklenebilir)
-  var form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var name = form.querySelector('[name="name"]').value.trim();
-      var phone = form.querySelector('[name="phone"]').value.trim();
-      var message = form.querySelector('[name="message"]').value.trim();
-      if (!name || !phone) {
-        alert('Lütfen Ad Soyad ve Telefon alanlarını doldurun.');
-        return;
-      }
-      // WhatsApp veya tel ile yönlendirme seçeneği
-      var whatsappText = 'Merhaba, randevu almak istiyorum. Ad Soyad: ' + name + ', Telefon: ' + phone;
-      if (message) whatsappText += '\nMesaj: ' + message;
-      var encoded = encodeURIComponent(whatsappText);
-      if (confirm('Formu göndermek yerine WhatsApp ile iletişime geçmek ister misiniz? (Önerilen)')) {
-        window.open('https://wa.me/905454201468?text=' + encoded, '_blank');
-      } else {
-        // Burada backend'e POST yapılabilir
-        alert('Mesajınız alındı. En kısa sürede sizinle iletişime geçeceğiz. Alternatif: +90 545 420 14 68 numarasından arayabilirsiniz.');
-        form.reset();
-      }
-    });
-  }
+  // İletişim formu FormSubmit.co ile gönderiliyor (action/method HTML'de). Ek JS gerekmez.
 
   // Header scroll: hafif arka plan
   var header = document.querySelector('.header');
