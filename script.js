@@ -25,7 +25,48 @@
     });
   });
 
-  // İletişim formu FormSubmit.co ile gönderiliyor (action/method HTML'de). Ek JS gerekmez.
+  // İletişim formu: fetch ile FormSubmit.co'ya gönder, ardından doğrudan teşekkür sayfasına yönlendir (ara sayfa yok).
+  var form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = form.querySelector('[name="name"]').value.trim();
+      var phone = form.querySelector('[name="phone"]').value.trim();
+      var message = form.querySelector('[name="message"]').value.trim();
+      if (!name || !phone) {
+        alert('Lütfen Ad Soyad ve Telefon alanlarını doldurun.');
+        return;
+      }
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Gönderiliyor…';
+      }
+      var body = new FormData();
+      body.append('_subject', 'İletişim formu — Psikogenetik & Longevity');
+      body.append('_captcha', 'false');
+      body.append('name', name);
+      body.append('phone', phone);
+      body.append('message', message);
+      fetch('https://formsubmit.co/freelancereklamhizmeti@gmail.com', {
+        method: 'POST',
+        body: body,
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(function () {
+          window.location.href = 'tesekkurler.html';
+        })
+        .catch(function () {
+          window.location.href = 'tesekkurler.html';
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Gönder';
+          }
+        });
+    });
+  }
 
   // Header scroll: hafif arka plan
   var header = document.querySelector('.header');
