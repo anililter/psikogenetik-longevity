@@ -42,6 +42,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -2582,32 +2583,44 @@ body {
   gap: 0.5rem;
 }
 
-.page-quiz .quiz-opt {
+.page-quiz .quiz-opts label {
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius);
   background: var(--color-surface);
-  padding: 0.6rem 0.4rem;
+  padding: 0.8rem 0.6rem;
   text-align: center;
   cursor: pointer;
   user-select: none;
   font-size: 0.9rem;
   transition: border-color var(--transition), background var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.page-quiz .quiz-opt:hover {
+.page-quiz .quiz-opts label:hover {
   border-color: var(--color-accent);
   background: var(--color-accent-light);
 }
 
-.page-quiz .quiz-opt.active {
-  border-color: var(--color-accent);
-  background: var(--color-accent-light);
+.page-quiz .quiz-opts label input {
+  accent-color: var(--color-accent);
+}
+
+.page-quiz .quiz-opts label input:checked + span {
   color: var(--color-accent);
   font-weight: 700;
 }
 
-.page-quiz .quiz-opt input {
-  display: none;
+.page-quiz .quiz-opts label span {
+  font-weight: 700;
+}
+
+.page-quiz .quiz-opts label small {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
 }
 
 .page-quiz .quiz-legend {
@@ -2718,6 +2731,52 @@ body {
 
 .page-quiz .quiz-result-cta__buttons .btn {
   min-width: 200px;
+  flex: 1;
+  min-width: 0;
+}
+
+.page-quiz .trigger-score-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.page-quiz .trigger-score-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+}
+
+.page-quiz .trigger-result-cta {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: var(--color-accent-light);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.page-quiz .trigger-result-cta__title {
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+}
+
+.page-quiz .trigger-result-cta__lead {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.page-quiz .trigger-result-cta__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
 }
 
 /* İnteraktif testler liste sayfası */
@@ -2780,6 +2839,37 @@ body {
   .page-quiz .quiz-opts {
     grid-template-columns: 1fr;
   }
+
+  .page-quiz .quiz-result-cta__buttons {
+    flex-direction: column;
+  }
+
+  .page-quiz .quiz-result-cta__buttons .btn {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .page-quiz .quiz-actions {
+    gap: 0.5rem;
+  }
+
+  .page-quiz .quiz-actions .btn {
+    flex: 1;
+  }
+
+  .page-quiz .quiz-result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-quiz .quiz-legend {
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+  }
+
+  .page-quiz .quiz-card {
+    padding: 0.75rem 1rem;
+  }
 }
 
 /* ========== Trigger blog: Yavaşlamak Bazen Cesarettir ========== */
@@ -2836,6 +2926,8 @@ body {
   border-bottom: 2px dashed var(--color-accent-light);
   padding: 0 2px;
   transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .page-trigger-blog .trigger-word:hover {
@@ -2850,13 +2942,28 @@ body {
   background: var(--color-accent-light);
 }
 
+.page-trigger-blog .trigger-blog-article {
+  line-height: 1.85;
+  word-wrap: break-word;
+}
+
 .page-trigger-blog .trigger-blog-article p {
   margin: 0 0 1rem;
   line-height: 1.85;
 }
 
+.page-trigger-blog .trigger-blog-article .trigger-word {
+  display: inline;
+  padding: 0 2px;
+}
+
+.page-trigger-blog .trigger-blog-results {
+  line-height: 1.7;
+}
+
 .page-trigger-blog .trigger-blog-results .placeholder {
   color: var(--color-text-muted);
+  font-style: italic;
 }
 
 .page-trigger-blog .trigger-score-list {
@@ -2963,6 +3070,12 @@ body {
 .page-trigger-blog .trigger-result-cta__title {
   margin: 0 0 0.35rem;
   font-weight: 700;
+}
+
+.page-trigger-blog .trigger-result-cta__lead {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
 }
 
 .page-trigger-blog .trigger-result-cta__buttons {

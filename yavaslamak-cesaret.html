@@ -17,7 +17,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=3">
 </head>
-<body class="page-trigger-blog">
+<body class="page-quiz">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQBD9XMN"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -43,59 +43,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </header>
 
-  <main class="page">
+  <main class="page page-quiz">
     <section class="page-hero page-hero--about">
       <div class="page-hero__bg" aria-hidden="true"></div>
       <div class="container">
         <p class="page-hero__label">İnteraktif içerik</p>
         <h1 class="page-hero__title">Yavaşlamak Bazen Cesarettir</h1>
-        <p class="page-hero__lead">Yazı içindeki altı çizili kelimelere tıklayarak mini ölçek sorularını cevapla. Verdiğin yanıtlardan kısa bir psikolojik içgörü çıkaracak.</p>
+        <p class="page-hero__lead">5 soruluk mini ölçek ile stres, öz-eleştiri, farkındalık, sosyal destek ve öz-şefkat dumanlarını değerlendirerek kişisel psikolojik profilin hakkında içgörü elde et.</p>
       </div>
     </section>
 
-    <div class="trigger-blog-wrap">
-      <section class="trigger-blog-box">
-        <div class="trigger-blog-progress-wrap">
-          <div class="trigger-blog-progress-label">
-            <span>Ölçek ilerlemesi</span>
-            <strong id="progressText">0/5</strong>
+    <div class="quiz-wrap">
+      <section class="quiz-box quiz-section">
+        <div class="quiz-progress-row">
+          <span id="progressText">Soru 1/5</span>
+          <span id="answeredText">Yanıtlanan: 0</span>
+        </div>
+        <div class="quiz-bar"><div class="quiz-bar-inner" id="progressBar"></div></div>
+
+        <div class="quiz-card">
+          <div class="quiz-q-meta" id="qMeta"></div>
+          <p class="quiz-q-text" id="qText"></p>
+          <div class="quiz-opts" id="options"></div>
+          <div class="quiz-legend">
+            <span>1 = Hiç katılmıyorum</span>
+            <span>5 = Tamamen katılıyorum</span>
           </div>
-          <div class="trigger-blog-progress"><div id="progressBar"></div></div>
+          <div class="quiz-warn" id="warn"></div>
+        </div>
+
+        <div class="quiz-actions">
+          <button type="button" class="btn btn-ghost" id="prevBtn">Geri</button>
+          <button type="button" class="btn btn-primary" id="nextBtn">İleri</button>
         </div>
       </section>
 
-      <article class="trigger-blog-box trigger-blog-article">
-        <p>
-          Bazen günün ortasında içimizde bir
-          <button type="button" class="trigger-word" data-question="q1">gerginlik</button>
-          yükselir; ne olduğunu anlamadan daha hızlı konuşur, daha hızlı karar veririz. Oysa beden, çoğu zaman zihinden önce bir şeylerin değiştiğini fark eder.
-        </p>
-        <p>
-          Zorlayıcı anlarda ilk refleksimiz kendimize karşı
-          <button type="button" class="trigger-word" data-question="q2">sertlik</button>
-          olabilir. "Daha iyi yapmalıydım" cümlesi, bazen bir motivasyon değil, sessiz bir yıpranma biçimine dönüşür.
-        </p>
-        <p>
-          Dikkatimizi kısa bir nefese verdiğimizde,
-          <button type="button" class="trigger-word" data-question="q3">farkındalık</button>
-          geri gelir. Duygu kaybolmaz ama yönetilebilir hale geçer; kontrol yeniden kurulmaya başlar.
-        </p>
-        <p>
-          Kimi zaman da çevremizdeki insanlar, bir aynaya dönüşür. Aldığımız
-          <button type="button" class="trigger-word" data-question="q4">destek</button>
-          duygusu arttıkça, yük aynı kalsa bile taşıma kapasitemiz değişir.
-        </p>
-        <p>
-          Sonunda mesele mükemmel olmak değil, iç sesimizi biraz daha
-          <button type="button" class="trigger-word" data-question="q5">şefkatli</button>
-          bir tona taşıyabilmektir. Küçük bir ton değişimi, büyük bir psikolojik alan açabilir.
-        </p>
-      </article>
-
-      <section class="trigger-blog-box trigger-blog-results" id="results">
+      <section class="quiz-box quiz-result" id="results">
         <h2>Kişisel İçgörü</h2>
-        <p class="placeholder" id="insightText">Tüm soruları tamamladığında, yanıtlarına göre otomatik içgörü burada görünecek.</p>
-        <div id="insightCta"></div>
+        <p id="resultIntro">Tüm soruları yanıtladığında kişisel sonuç raporun burada görünecek.</p>
+        <div id="resultBody"></div>
       </section>
     </div>
   </main>
@@ -148,95 +134,87 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
   </div>
 
-  <div class="trigger-modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="trigger-modal-panel">
-      <h3 id="modalTitle">Soru</h3>
-      <p class="modal-question" id="modalQuestion"></p>
-      <div class="trigger-likert" id="likert"></div>
-      <div class="trigger-modal-warn" id="warn"></div>
-      <div class="trigger-modal-actions">
-        <button type="button" class="btn btn-ghost" id="closeBtn">Kapat</button>
-        <button type="button" class="btn btn-primary" id="saveBtn">Kaydet</button>
-      </div>
-    </div>
-  </div>
-
   <script src="script.js?v=5"></script>
   <script>
   (function() {
-    var questions = {
-      q1: { word: "gerginlik", text: "Son 7 günde kendimi bedensel olarak gergin hissettiğim anlar sıklaştı.", scale: "stress" },
-      q2: { word: "sertlik", text: "Hata yaptığımda kendime karşı eleştirel ve sert bir dil kullanırım.", scale: "selfCriticism" },
-      q3: { word: "farkındalık", text: "Yoğun bir duygu geldiğinde onu fark edip adlandırabilirim.", scale: "awareness" },
-      q4: { word: "destek", text: "Zorlandığım dönemlerde başvurabileceğim bir sosyal destek ağım var.", scale: "support" },
-      q5: { word: "şefkatli", text: "Kendimle konuşurken yargılayıcı değil, daha anlayışlı bir ton kullanırım.", scale: "selfCompassion" }
-    };
+    var questions = [
+      { id: "q1", text: "Son 7 günde kendimi bedensel olarak gergin hissettiğim anlar sıklaştı.", scale: "stress", meta: "Stres & Bedensel Gerginlik" },
+      { id: "q2", text: "Hata yaptığımda kendime karşı eleştirel ve sert bir dil kullanırım.", scale: "selfCriticism", meta: "Öz-Eleştiri" },
+      { id: "q3", text: "Yoğun bir duygu geldiğinde onu fark edip adlandırabilirim.", scale: "awareness", meta: "Farkındalık" },
+      { id: "q4", text: "Zorlandığım dönemlerde başvurabileceğim bir sosyal destek ağım var.", scale: "support", meta: "Sosyal Destek" },
+      { id: "q5", text: "Kendimle konuşurken yargılayıcı değil, daha anlayışlı bir ton kullanırım.", scale: "selfCompassion", meta: "Öz-Şefkat" }
+    ];
+    
+    var currentIdx = 0;
     var responses = {};
-    var modal = document.getElementById("modal");
-    var modalTitle = document.getElementById("modalTitle");
-    var modalQuestion = document.getElementById("modalQuestion");
-    var likert = document.getElementById("likert");
     var warn = document.getElementById("warn");
     var progressText = document.getElementById("progressText");
+    var answeredText = document.getElementById("answeredText");
     var progressBar = document.getElementById("progressBar");
-    var insightText = document.getElementById("insightText");
-    var insightCta = document.getElementById("insightCta");
-    var activeQuestionId = null;
+    var qMeta = document.getElementById("qMeta");
+    var qText = document.getElementById("qText");
+    var options = document.getElementById("options");
+    var prevBtn = document.getElementById("prevBtn");
+    var nextBtn = document.getElementById("nextBtn");
+    var resultIntro = document.getElementById("resultIntro");
+    var resultBody = document.getElementById("resultBody");
+    var results = document.getElementById("results");
 
-    function openQuestion(questionId) {
-      activeQuestionId = questionId;
-      var q = questions[questionId];
-      modalTitle.textContent = "\"" + q.word + "\" için mini ölçek";
-      modalQuestion.textContent = q.text;
+    function renderQuestion() {
+      var q = questions[currentIdx];
+      qMeta.textContent = q.meta;
+      qText.textContent = q.text;
       warn.textContent = "";
-      likert.innerHTML = [1, 2, 3, 4, 5].map(function(value) {
-        return "<label><input type=\"radio\" name=\"likert\" value=\"" + value + "\" " + (responses[questionId] === value ? "checked" : "") + "><span>" + value + "</span></label>";
+      options.innerHTML = [1, 2, 3, 4, 5].map(function(val, idx) {
+        var labels = ["Hiç", "Az", "Orta", "Çok", "Tam"];
+        return "<label><input type=\"radio\" name=\"opts\" value=\"" + val + "\" " + (responses[q.id] === val ? "checked" : "") + "><span>" + val + "</span><small>" + labels[idx] + "</small></label>";
       }).join("");
-      modal.classList.add("active");
-    }
-
-    function closeModal() {
-      modal.classList.remove("active");
-    }
-
-    function saveAnswer() {
-      var selected = document.querySelector("input[name=\"likert\"]:checked");
-      if (!selected) {
-        warn.textContent = "Kaydetmeden önce 1-5 arasında bir seçenek seç.";
-        return;
-      }
-      responses[activeQuestionId] = Number(selected.value);
-      try { localStorage.setItem("yavaslamak_cesaret_responses", JSON.stringify(responses)); } catch (e) {}
-      closeModal();
-      renderProgress();
-      renderResults();
-    }
-
-    function renderProgress() {
+      progressText.textContent = "Soru " + (currentIdx + 1) + "/" + questions.length;
       var done = Object.keys(responses).length;
-      var total = Object.keys(questions).length;
-      progressText.textContent = done + "/" + total;
-      progressBar.style.width = (done / total) * 100 + "%";
-      document.querySelectorAll(".trigger-word").forEach(function(btn) {
-        btn.classList.toggle("done", responses[btn.dataset.question] !== undefined);
-      });
+      answeredText.textContent = "Yanıtlanan: " + done;
+      progressBar.style.width = (done / questions.length) * 100 + "%";
+      prevBtn.disabled = currentIdx === 0;
+      results.style.display = currentIdx >= questions.length ? "block" : "none";
     }
 
-    function renderResults() {
-      var total = Object.keys(questions).length;
-      if (Object.keys(responses).length < total) {
-        insightText.className = "placeholder";
-        insightText.innerHTML = "Tüm soruları tamamladığında kişisel içgörü burada oluşacak.";
-        insightCta.innerHTML = "";
+    function saveAndNext() {
+      var q = questions[currentIdx];
+      var selected = document.querySelector("input[name=\"opts\"]:checked");
+      if (!selected) {
+        warn.textContent = "Lütfen 1-5 arasında bir seçenek seç.";
         return;
       }
+      responses[q.id] = Number(selected.value);
+      try { localStorage.setItem("yavaslamak_responses", JSON.stringify(responses)); } catch (e) {}
+      if (currentIdx < questions.length - 1) {
+        currentIdx++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function savePrev() {
+      var q = questions[currentIdx];
+      var selected = document.querySelector("input[name=\"opts\"]:checked");
+      if (selected) {
+        responses[q.id] = Number(selected.value);
+        try { localStorage.setItem("yavaslamak_responses", JSON.stringify(responses)); } catch (e) {}
+      }
+      if (currentIdx > 0) {
+        currentIdx--;
+        renderQuestion();
+      }
+    }
+
+    function showResults() {
       var stress = responses.q1;
-      var selfCriticism = responses.q2;
-      var awareness = responses.q3;
-      var support = responses.q4;
-      var selfCompassion = responses.q5;
-      var resilience = ((awareness + support + selfCompassion) / 3).toFixed(1);
-      var pressure = ((stress + selfCriticism) / 2).toFixed(1);
+      var selfCrit = responses.q2;
+      var aware = responses.q3;
+      var supp = responses.q4;
+      var comp = responses.q5;
+      var pressure = ((stress + selfCrit) / 2).toFixed(1);
+      var resilience = ((aware + supp + comp) / 3).toFixed(1);
       var profile = "";
       if (pressure >= 4 && resilience <= 3) {
         profile = "Şu dönemde iç baskın yüksek görünüyor. Kendine yüklenme ve bedensel gerginlik birlikte artmış olabilir. İlk adım olarak kısa nefes molaları ve daha yumuşak bir iç konuşma denemek iyi gelebilir.";
@@ -245,35 +223,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       } else {
         profile = "Karışık ama geliştirilebilir bir profil var. Özellikle farkındalık ve öz-şefkat puanlarını 1 adım artırmak, genel psikolojik esnekliğini belirgin biçimde yükseltebilir.";
       }
-      insightText.className = "";
-      insightText.innerHTML =
+      resultIntro.style.display = "none";
+      resultBody.innerHTML =
         "<div class=\"trigger-score-list\">" +
-        "<div class=\"trigger-score-item\"><span>Stres + Öz-eleştiri ortalaması</span><strong>" + pressure + "/5</strong></div>" +
-        "<div class=\"trigger-score-item\"><span>Dayanıklılık (farkındalık + destek + öz-şefkat)</span><strong>" + resilience + "/5</strong></div>" +
-        "</div><p>" + profile + "</p>";
-      insightCta.innerHTML =
+        "<div class=\"trigger-score-item\"><span>Stres + Öz-eleştiri</span><strong>" + pressure + "/5</strong></div>" +
+        "<div class=\"trigger-score-item\"><span>Dayanıklılık (farkındalık + destek + şefkat)</span><strong>" + resilience + "/5</strong></div>" +
+        "</div><p>" + profile + "</p>" +
         "<div class=\"trigger-result-cta\">" +
-        "<p class=\"trigger-result-cta__title\">Sonuçlar hakkında konuşmak ister misiniz?</p>" +
-        "<p class=\"quiz-result-cta__lead\">Randevu ve bilgi için bizi arayın veya WhatsApp ile yazın.</p>" +
+        "<p class=\"trigger-result-cta__title\">Sonuçlar hakkında daha derinlemesine konuşmak ister misiniz?</p>" +
+        "<p class=\"trigger-result-cta__lead\">Profesyonel rehberlik ve terapi danışmanlığı için bizimle iletişime geçin.</p>" +
         "<div class=\"trigger-result-cta__buttons\">" +
         "<a href=\"tel:+905454201468\" class=\"btn btn-primary\">📞 0545 420 14 68</a>" +
         "<a href=\"https://wa.me/905454201468\" class=\"btn btn-whatsapp\" target=\"_blank\" rel=\"noopener\">WhatsApp ile yaz</a>" +
         "</div></div>";
     }
 
-    document.querySelectorAll(".trigger-word").forEach(function(btn) {
-      btn.addEventListener("click", function() { openQuestion(btn.dataset.question); });
-    });
-    document.getElementById("closeBtn").addEventListener("click", closeModal);
-    document.getElementById("saveBtn").addEventListener("click", saveAnswer);
-    modal.addEventListener("click", function(e) { if (e.target === modal) closeModal(); });
+    prevBtn.addEventListener("click", savePrev);
+    nextBtn.addEventListener("click", saveAndNext);
 
     try {
-      var saved = JSON.parse(localStorage.getItem("yavaslamak_cesaret_responses"));
+      var saved = JSON.parse(localStorage.getItem("yavaslamak_responses"));
       if (saved && typeof saved === "object") responses = saved;
     } catch (e) {}
-    renderProgress();
-    renderResults();
+    renderQuestion();
   })();
   </script>
 </body>
