@@ -160,6 +160,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var resultBody = document.getElementById("resultBody");
     var results = document.getElementById("results");
 
+    function updateProgressBar() {
+      var done = Object.keys(responses).length;
+      answeredText.textContent = "Yanıtlanan: " + done;
+      progressBar.style.width = (done / questions.length) * 100 + "%";
+    }
+
     function renderQuestion() {
       var q = questions[currentIdx];
       qMeta.textContent = q.meta;
@@ -167,14 +173,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       warn.textContent = "";
       options.innerHTML = [1, 2, 3, 4, 5].map(function(val, idx) {
         var labels = ["Hiç", "Az", "Orta", "Çok", "Tam"];
-        return "<label><input type=\"radio\" name=\"opts\" value=\"" + val + "\" " + (responses[q.id] === val ? "checked" : "") + "><span>" + val + "</span><small>" + labels[idx] + "</small></label>";
+        return "<label><input type=\"radio\" name=\"opts\" value=\"" + val + "\" " + (responses[q.id] === val ? "checked" : "") + " data-question-id=\"" + q.id + "\"><span>" + val + "</span><small>" + labels[idx] + "</small></label>";
       }).join("");
       progressText.textContent = "Soru " + (currentIdx + 1) + "/" + questions.length;
-      var done = Object.keys(responses).length;
-      answeredText.textContent = "Yanıtlanan: " + done;
-      progressBar.style.width = (done / questions.length) * 100 + "%";
+      updateProgressBar();
+      
+      // Attach event listeners to new inputs
+      var optInputs = options.querySelectorAll("input[name=\"opts\"]");
+      optInputs.forEach(function(input) {
+        input.addEventListener("change", handleOptionChange);
+      });
+      
       prevBtn.disabled = currentIdx === 0;
       results.style.display = currentIdx >= questions.length ? "block" : "none";
+    }
+
+    function handleOptionChange(e) {
+      var questionId = e.target.getAttribute("data-question-id");
+      responses[questionId] = Number(e.target.value);
+      try { localStorage.setItem("yavaslamak_responses", JSON.stringify(responses)); } catch (e) {}
+      updateProgressBar();
     }
 
     function saveAndNext() {
@@ -184,8 +202,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         warn.textContent = "Lütfen 1-5 arasında bir seçenek seç.";
         return;
       }
-      responses[q.id] = Number(selected.value);
-      try { localStorage.setItem("yavaslamak_responses", JSON.stringify(responses)); } catch (e) {}
+      warn.textContent = "";
       if (currentIdx < questions.length - 1) {
         currentIdx++;
         renderQuestion();
@@ -195,12 +212,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     function savePrev() {
-      var q = questions[currentIdx];
-      var selected = document.querySelector("input[name=\"opts\"]:checked");
-      if (selected) {
-        responses[q.id] = Number(selected.value);
-        try { localStorage.setItem("yavaslamak_responses", JSON.stringify(responses)); } catch (e) {}
-      }
       if (currentIdx > 0) {
         currentIdx--;
         renderQuestion();
@@ -224,6 +235,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         profile = "Karışık ama geliştirilebilir bir profil var. Özellikle farkındalık ve öz-şefkat puanlarını 1 adım artırmak, genel psikolojik esnekliğini belirgin biçimde yükseltebilir.";
       }
       resultIntro.style.display = "none";
+      results.style.display = "block";
       resultBody.innerHTML =
         "<div class=\"trigger-score-list\">" +
         "<div class=\"trigger-score-item\"><span>Stres + Öz-eleştiri</span><strong>" + pressure + "/5</strong></div>" +
