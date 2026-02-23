@@ -2781,14 +2781,15 @@ body {
 
 /* İnteraktif testler liste sayfası */
 .test-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
   gap: 1.5rem;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
   .test-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 }
 
