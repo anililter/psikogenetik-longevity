@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADHD: Bilimsel Rehber + 10 Soruluk Likert Ölçeği</title>
+    <link rel="stylesheet" href="styles.css?v=3">
+    <style>
+      :root {
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --ink: #1f2735;
+        --muted: #5f6c7f;
+        --primary: #5b52d6;
+        --primary-soft: #e8e6ff;
+        --line: #dfe3f2;
+        --ok: #2f7d49;
+        --mid: #9f6f13;
+        --high: #b34926;
+        --vhigh: #b43333;
+        --warn: #9a6710;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+        color: var(--ink);
+        line-height: 1.68;
+        background:
+          radial-gradient(circle at 92% -14%, #e5e2ff 0%, transparent 35%),
+          radial-gradient(circle at 0% 0%, #f0efff 0%, transparent 26%),
+          var(--bg);
+      }
+      .wrap { width: min(1080px, 92vw); margin: 28px auto 60px; }
+      .box {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: 0 12px 30px rgba(25, 33, 51, 0.08);
+        padding: clamp(18px, 2.8vw, 32px);
+        margin-bottom: 16px;
+      }
+      h1, h2, h3 { margin-top: 0; line-height: 1.2; }
+      h1 { font-size: clamp(1.9rem, 4vw, 3rem); margin-bottom: 10px; }
+      h2 { font-size: clamp(1.2rem, 2.2vw, 1.75rem); margin-bottom: 10px; }
+      p { margin: 0 0 12px; }
+      .muted { color: var(--muted); }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+      .chip {
+        border: 1px solid #d2cff8;
+        background: #f5f4ff;
+        color: #3f3a9a;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 10px;
+      }
+      .card {
+        border: 1px solid #e1e4f3;
+        background: #fcfcff;
+        border-radius: 12px;
+        padding: 10px 12px;
+      }
+      .list { margin: 0; padding-left: 18px; }
+      .list li { margin-bottom: 6px; }
+      .highlight {
+        border-left: 4px solid var(--primary);
+        background: #f8f7ff;
+        border-radius: 10px;
+        padding: 10px 12px;
+      }
+      .quiz-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+      .bar {
+        width: 100%;
+        height: 12px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: #ebeef9;
+        margin: 10px 0 14px;
+      }
+      .bar > div {
+        width: 0;
+        height: 100%;
+        transition: width .25s ease;
+        background: linear-gradient(90deg, #5b52d6, #8b84ee);
+      }
+      .q-box {
+        border: 1px solid #e0e5f4;
+        border-radius: 12px;
+        background: #fcfcff;
+        padding: 14px;
+      }
+      .q-meta { color: var(--muted); font-size: .9rem; margin-bottom: 6px; }
+      .q-text { margin: 0 0 10px; font-size: 1.04rem; }
+      .opts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+      .opt {
+        border: 1px solid #d8e0f2;
+        border-radius: 10px;
+        background: #fff;
+        padding: 8px 6px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .opt.active {
+        border-color: var(--primary);
+        background: var(--primary-soft);
+        color: #3f3a9a;
+        font-weight: 700;
+      }
+      .opt input { display: none; }
+      .legend {
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: .79rem;
+        margin-top: 8px;
+      }
+      .warn { min-height: 1.1em; margin-top: 6px; color: var(--warn); font-size: .9rem; }
+      .actions { margin-top: 12px; display: flex; justify-content: space-between; }
+      .btn {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .btn.soft { background: #ebedf5; color: #344456; }
+      .btn.main { background: var(--primary); color: #fff; }
+      .badge {
+        display: inline-flex;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: .88rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .b-low { background: #e3f3e9; color: var(--ok); }
+      .b-mid { background: #fff1da; color: var(--mid); }
+      .b-high { background: #ffe4df; color: var(--high); }
+      .b-vhigh { background: #ffdfe0; color: var(--vhigh); }
+      .foot {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed #d6dcec;
+        font-size: .9rem;
+        color: var(--muted);
+      }
+      @media (max-width: 760px) { .opts { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="box">
+        <h1>ADHD (Dikkat Eksikliği ve Hiperaktivite Bozukluğu): Bilimsel Bir Bakış</h1>
+        <p class="muted">
+          ADHD yalnızca çocukluk dönemiyle sınırlı değildir; dikkat, dürtüsellik, zaman yönetimi ve yürütücü
+          işlevleri etkileyebilen nörogelişimsel bir durumdur. Uygun değerlendirme ve kişiselleştirilmiş destekle
+          işlevsellik belirgin biçimde iyileştirilebilir.
+        </p>
+        <div class="chips">
+          <span class="chip">Dikkat düzenleme</span>
+          <span class="chip">Dürtüsellik</span>
+          <span class="chip">Yürütücü işlev</span>
+          <span class="chip">Nörogelişimsel yaklaşım</span>
+          <span class="chip">İnteraktif tarama</span>
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>1. ADHD Nedir?</h2>
+        <p>
+          ADHD; dikkati sürdürme güçlüğü, aşırı hareketlilik ve/veya dürtüsellik belirtileriyle seyreden bir
+          nörogelişimsel örüntüdür. Klinik tanı; belirtilerin birden fazla ortamda görülmesi, işlevselliği
+          etkilemesi ve gelişimsel döneme uygun olmayan yoğunlukta olması kriterleriyle değerlendirilir.
+        </p>
+        <div class="highlight">
+          ADHD bir irade zayıflığı değil, beyin temelli dikkat-düzenleme sistemlerinin farklı çalışmasıdır.
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>2. Nörobiyolojik Temel</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Yürütücü İşlev Ağları</h3>
+            <p>Prefrontal devrelerdeki farklılıklar planlama, başlatma ve sürdürme becerilerini etkileyebilir.</p>
+          </div>
+          <div class="card">
+            <h3>Dopamin/Noradrenalin</h3>
+            <p>Ödül, motivasyon ve dikkat süreçleriyle ilişkili nörotransmitter dengesi belirleyici olabilir.</p>
+          </div>
+          <div class="card">
+            <h3>Zaman Körlüğü</h3>
+            <p>Zamanı hissetme ve görev süresini öngörme güçlüğü günlük planlamayı zorlaştırabilir.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>3. Günlük Yaşamda Görünüm</h2>
+        <ul class="list">
+          <li>Kolay dikkat dağılması ve görev tamamlama güçlüğü</li>
+          <li>Erteleme, dağınıklık, zaman yönetiminde zorlanma</li>
+          <li>Dürtüsel kararlar ve söz kesme eğilimi</li>
+          <li>Rutin işlerde motivasyon düşüklüğü, ilgiye göre aşırı odaklanma</li>
+          <li>İş/okul ve ilişkilerde performans dalgalanmaları</li>
+        </ul>
+      </section>
+
+      <section class="box">
+        <h2>4. Bilimsel Destek Yaklaşımları</h2>
+        <ul class="list">
+          <li><strong>Psychoeducation:</strong> ADHD örüntüsünü anlamak ve çevresel düzenleme yapmak.</li>
+          <li><strong>Psikoterapi:</strong> BDT temelli beceri eğitimi, davranış düzenleme, duygu yönetimi.</li>
+          <li><strong>İlaç tedavisi:</strong> Uygun olgularda dikkat ve dürtü kontrolüne yardımcı olabilir.</li>
+          <li><strong>Yaşam tarzı:</strong> Uyku, egzersiz, dijital dikkat hijyeni, görev parçalama teknikleri.</li>
+          <li><strong>Çevresel yapı:</strong> Görsel planlayıcılar, kısa görev blokları, hatırlatıcı sistemler.</li>
+        </ul>
+      </section>
+
+      <section class="box">
+        <h2>10 Soruluk ADHD Yatkınlık Farkındalık Ölçeği (5'li Likert)</h2>
+        <p class="muted">Bu araç tanı koymaz; klinik değerlendirme ihtiyacını öngörmeye yardımcı olur.</p>
+
+        <div class="quiz-head">
+          <span id="progressText">Soru 1/10</span>
+          <span id="answeredText">Yanıtlanan: 0</span>
+        </div>
+        <div class="bar"><div id="barIn"></div></div>
+
+        <div class="q-box">
+          <div class="q-meta" id="qMeta"></div>
+          <p class="q-text" id="qText"></p>
+          <div class="opts" id="opts"></div>
+          <div class="legend">
+            <span>1 = Hiç</span>
+            <span>5 = Çok sık / belirgin</span>
+          </div>
+          <div class="warn" id="warn"></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn soft" id="prevBtn">Geri</button>
+          <button class="btn main" id="nextBtn">İleri</button>
+        </div>
+      </section>
+
+      <section class="box" id="resultBox">
+        <h2>Sonuç ve Kişisel Öneriler</h2>
+        <p id="resultIntro">Tüm sorular tamamlandığında sonuç burada görünecek.</p>
+        <div id="resultBody"></div>
+      </section>
+    </main>
+
+    <script>
+      const questions = [
+        { d: "Dikkat", t: "Uzun veya rutin görevlerde dikkatimi sürdürmekte zorlanırım." },
+        { d: "Organizasyon", t: "Görevleri planlama ve sıraya koyma konusunda sık zorlanırım." },
+        { d: "Erteleme", t: "Başlamam gereken işleri son ana kadar ertelerim." },
+        { d: "Unutkanlık", t: "Toplantı, randevu veya günlük sorumlulukları sık unuturum." },
+        { d: "Dürtüsellik", t: "Düşünmeden konuşma/karar verme eğilimim yüksektir." },
+        { d: "Huzursuzluk", t: "Uzun süre yerimde oturmak veya sakin kalmakta zorlanırım." },
+        { d: "Zaman yönetimi", t: "Bir işin ne kadar süreceğini gerçekçi tahmin edemem." },
+        { d: "Dikkat dağılması", t: "Dış uyaranlar (ses, bildirim, ortam) beni kolayca böler." },
+        { d: "Görev tamamlama", t: "Birçok işe başlar ama tamamlamakta zorlanırım." },
+        { d: "İşlevsellik", t: "Bu belirtiler iş/okul/ilişki performansımı belirgin etkiliyor." }
+      ];
+
+      const labels = ["1<br>Hiç", "2<br>Nadiren", "3<br>Bazen", "4<br>Sık", "5<br>Çok sık"];
+      const answers = Array(questions.length).fill(null);
+      let idx = 0;
+
+      const qMeta = document.getElementById("qMeta");
+      const qText = document.getElementById("qText");
+      const opts = document.getElementById("opts");
+      const warn = document.getElementById("warn");
+      const progressText = document.getElementById("progressText");
+      const answeredText = document.getElementById("answeredText");
+      const barIn = document.getElementById("barIn");
+      const resultIntro = document.getElementById("resultIntro");
+      const resultBody = document.getElementById("resultBody");
+
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        if (idx > 0) {
+          idx -= 1;
+          drawQuestion();
+        }
+      });
+
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        if (answers[idx] == null) {
+          warn.textContent = "Devam etmek için bu soruyu puanla.";
+          return;
+        }
+        warn.textContent = "";
+        if (idx < questions.length - 1) {
+          idx += 1;
+          drawQuestion();
+        } else {
+          renderResult();
+        }
+      });
+
+      function setAnswer(v) {
+        answers[idx] = v;
+        drawQuestion();
+      }
+
+      function drawQuestion() {
+        qMeta.textContent = `Boyut: ${questions[idx].d}`;
+        qText.textContent = questions[idx].t;
+        progressText.textContent = `Soru ${idx + 1}/${questions.length}`;
+        const done = answers.filter((x) => x != null).length;
+        answeredText.textContent = `Yanıtlanan: ${done}`;
+        barIn.style.width = `${(done / questions.length) * 100}%`;
+        document.getElementById("nextBtn").textContent = idx === questions.length - 1 ? "Sonucu Gör" : "İleri";
+
+        opts.innerHTML = labels
+          .map((l, i) => {
+            const val = i + 1;
+            const active = answers[idx] === val ? "active" : "";
+            return `<label class="opt ${active}"><input type="radio" ${answers[idx] === val ? "checked" : ""}/><span>${l}</span></label>`;
+          })
+          .join("");
+
+        [...opts.querySelectorAll(".opt")].forEach((el, i) => {
+          el.addEventListener("click", () => setAnswer(i + 1));
+        });
+      }
+
+      function level(total) {
+        if (total <= 19) return { cls: "b-low", name: "Düşük Düzey", text: "Belirgin bir ADHD örüntüsü görünmüyor; koruyucu düzeni sürdür." };
+        if (total <= 29) return { cls: "b-mid", name: "Hafif-Orta Düzey", text: "Bazı alanlarda zorlanma var; beceri temelli yapılandırma faydalı olabilir." };
+        if (total <= 39) return { cls: "b-high", name: "Orta-Yüksek Düzey", text: "Belirtiler işlevselliği etkileyebilir; profesyonel değerlendirme önerilir." };
+        return { cls: "b-vhigh", name: "Yüksek Düzey", text: "Belirtiler belirgin; kapsamlı klinik değerlendirme planlanmalıdır." };
+      }
+
+      function renderResult() {
+        const total = answers.reduce((a, b) => a + b, 0);
+        const avg = (total / answers.length).toFixed(2);
+        const risk = level(total);
+
+        resultIntro.innerHTML = `<span class="badge ${risk.cls}">${risk.name}</span> Toplam skor: <strong>${total}/50</strong> (Ort: ${avg}/5) - ${risk.text}`;
+        resultBody.innerHTML = `
+          <p><strong>Öneri seti:</strong></p>
+          <ul class="list">
+            <li>Görevleri 10-25 dakikalık kısa bloklara böl (zamanlayıcı kullan).</li>
+            <li>Günlük 3 öncelik kuralı belirle; kalanları ikincil listeye al.</li>
+            <li>Bildirimleri toplu saatlerde kontrol ederek dikkat bölünmesini azalt.</li>
+            <li>Uyku saatini sabitle ve haftada en az 4 gün düzenli egzersiz ekle.</li>
+            <li>Belirtiler sürerse psikiyatri/klinik psikoloji değerlendirmesi planla.</li>
+          </ul>
+          <div class="foot">
+            Bu ölçek tanı koymaz. Kesin değerlendirme için klinik görüşme, ölçekler ve gerektiğinde
+            eşlik eden durumların ayrıntılı incelenmesi gerekir.
+          </div>
+        `;
+
+        document.getElementById("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      drawQuestion();
+    </script>
+  </body>
+</html>

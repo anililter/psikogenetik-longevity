@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demans: Bilimsel Rehber + 10 Soruluk Likert Ölçeği</title>
+    <link rel="stylesheet" href="styles.css?v=3">
+    <style>
+      :root {
+        --bg: #f5f8fb;
+        --card: #ffffff;
+        --ink: #1d2835;
+        --muted: #5c6c7f;
+        --primary: #1368c3;
+        --primary-soft: #e2efff;
+        --line: #dbe6f2;
+        --warn: #9b6710;
+        --ok: #2e7e4a;
+        --mid: #9f6f13;
+        --high: #b34725;
+        --vhigh: #b43333;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+        color: var(--ink);
+        line-height: 1.68;
+        background:
+          radial-gradient(circle at 92% -12%, #d9eaff 0%, transparent 34%),
+          radial-gradient(circle at 0% 0%, #edf4ff 0%, transparent 24%),
+          var(--bg);
+      }
+
+      .wrap {
+        width: min(1080px, 92vw);
+        margin: 28px auto 60px;
+      }
+
+      .box {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: 0 12px 32px rgba(21, 38, 58, 0.08);
+        padding: clamp(18px, 2.8vw, 32px);
+        margin-bottom: 16px;
+      }
+
+      h1, h2, h3 { margin-top: 0; line-height: 1.2; }
+      h1 { font-size: clamp(1.9rem, 4vw, 3rem); margin-bottom: 10px; }
+      h2 { font-size: clamp(1.2rem, 2.2vw, 1.75rem); margin-bottom: 10px; }
+      p { margin: 0 0 12px; }
+
+      .muted { color: var(--muted); }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .chip {
+        border: 1px solid #cfe1f7;
+        background: #f2f8ff;
+        color: #1f4f84;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 10px;
+      }
+
+      .card {
+        border: 1px solid #dce7f3;
+        background: #fbfdff;
+        border-radius: 12px;
+        padding: 10px 12px;
+      }
+
+      .list {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .list li { margin-bottom: 6px; }
+
+      .highlight {
+        border-left: 4px solid var(--primary);
+        background: #f7fbff;
+        border-radius: 10px;
+        padding: 10px 12px;
+      }
+
+      .quiz-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .bar {
+        width: 100%;
+        height: 12px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: #e8eff8;
+        margin: 10px 0 14px;
+      }
+
+      .bar > div {
+        width: 0;
+        height: 100%;
+        background: linear-gradient(90deg, #1368c3, #4b94e5);
+        transition: width 0.25s ease;
+      }
+
+      .q-box {
+        border: 1px solid #dce7f4;
+        border-radius: 12px;
+        background: #fbfdff;
+        padding: 14px;
+      }
+
+      .q-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 6px; }
+      .q-text { margin: 0 0 10px; font-size: 1.04rem; }
+
+      .opts {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .opt {
+        border: 1px solid #d6e3f2;
+        border-radius: 10px;
+        padding: 8px 6px;
+        text-align: center;
+        background: #fff;
+        cursor: pointer;
+      }
+
+      .opt.active {
+        border-color: var(--primary);
+        background: var(--primary-soft);
+        color: #184a89;
+        font-weight: 700;
+      }
+
+      .opt input { display: none; }
+
+      .legend {
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 0.79rem;
+        margin-top: 8px;
+      }
+
+      .warn {
+        min-height: 1.1em;
+        margin-top: 6px;
+        color: var(--warn);
+        font-size: 0.9rem;
+      }
+
+      .actions {
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .btn.soft { background: #e9eef5; color: #334353; }
+      .btn.main { background: var(--primary); color: #fff; }
+
+      .badge {
+        display: inline-flex;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .b-low { background: #e3f3e9; color: var(--ok); }
+      .b-mid { background: #fff1da; color: var(--mid); }
+      .b-high { background: #ffe4df; color: var(--high); }
+      .b-vhigh { background: #ffdfe0; color: var(--vhigh); }
+
+      .foot {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed #d5deea;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 760px) {
+        .opts { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="box">
+        <h1>Demans Nedir? Bilimsel Bir Rehber</h1>
+        <p class="muted">
+          Demans, yalnızca yaşlanmanın doğal bir sonucu değil; bellek, dikkat, yürütücü işlevler ve günlük
+          yaşam becerilerini etkileyebilen nörobilişsel bir sendromdur. Erken farkındalık, yaşam kalitesini
+          korumada kritik rol oynar.
+        </p>
+        <div class="chips">
+          <span class="chip">Alzheimer</span>
+          <span class="chip">Vasküler demans</span>
+          <span class="chip">Lewy cisimcikli demans</span>
+          <span class="chip">Fronto-temporal demans</span>
+          <span class="chip">Erken tarama</span>
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>1. Demansın Tanımı ve Klinik Çerçeve</h2>
+        <p>
+          Demans; bellek, dil, planlama, problem çözme ve yönelim gibi bilişsel alanlarda kalıcı gerileme ile
+          seyreden bir tablodur. Tanı, tek bir teste değil; klinik değerlendirme, nöropsikolojik testler,
+          görüntüleme ve laboratuvar bulgularının birlikte yorumlanmasına dayanır.
+        </p>
+        <div class="highlight">
+          Ana ayrım: Basit unutkanlıkta günlük işlev korunur; demansta ise günlük işlevsellik belirgin etkilenir.
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>2. Nörobiyolojik Mekanizmalar</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Nöronal Kayıp ve Sinaptik Bozulma</h3>
+            <p>Beyin ağlarında bağlantı kaybı öğrenme, bellek ve karar süreçlerini zayıflatabilir.</p>
+          </div>
+          <div class="card">
+            <h3>Protein Birikimi</h3>
+            <p>Alzheimer'da amiloid ve tau birikimi, nöronal işlev kaybıyla ilişkilidir.</p>
+          </div>
+          <div class="card">
+            <h3>Vasküler Etki</h3>
+            <p>Damarsal risk faktörleri beyin perfüzyonunu etkileyerek bilişsel yıkımı hızlandırabilir.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>3. Risk Faktörleri ve Yatkınlık</h2>
+        <ul class="list">
+          <li><strong>Yaş:</strong> En güçlü risk belirleyicilerden biridir.</li>
+          <li><strong>Genetik:</strong> Aile öyküsü ve bazı gen varyantları riski artırabilir.</li>
+          <li><strong>Kardiyometabolik durum:</strong> Hipertansiyon, diyabet, obezite, sigara.</li>
+          <li><strong>Yaşam tarzı:</strong> Düşük fiziksel aktivite, sosyal izolasyon, uyku bozukluğu.</li>
+          <li><strong>Düşük bilişsel rezerv:</strong> Zihinsel uyarımın sınırlı olması kırılganlığı artırabilir.</li>
+        </ul>
+      </section>
+
+      <section class="box">
+        <h2>4. Günlük Yaşamda Erken İşaretler</h2>
+        <ul class="list">
+          <li>Aynı soruları tekrar tekrar sorma</li>
+          <li>Yakın geçmiş olayları hatırlamada zorlanma</li>
+          <li>Randevu/ilaç/ödeme takibinde aksama</li>
+          <li>Kelime bulma güçlüğü ve konuşma akışında yavaşlama</li>
+          <li>Yön bulma ve mekansal karışıklık</li>
+          <li>Karar verme ve planlamada zorlanma</li>
+        </ul>
+      </section>
+
+      <section class="box">
+        <h2>5. Koruyucu ve Destekleyici Yaklaşımlar</h2>
+        <ul class="list">
+          <li><strong>Damar sağlığı yönetimi:</strong> Tansiyon, şeker, lipid kontrolü.</li>
+          <li><strong>Düzenli egzersiz:</strong> Aerobik + denge çalışmaları.</li>
+          <li><strong>Zihinsel aktivite:</strong> Öğrenme, okuma, strateji oyunları, yeni beceri edinimi.</li>
+          <li><strong>Sosyal etkileşim:</strong> İzolasyonu azaltan düzenli temas.</li>
+          <li><strong>Uyku hijyeni:</strong> Sirkadiyen ritmin korunması.</li>
+          <li><strong>Beslenme:</strong> Akdeniz tipi, anti-inflamatuar odaklı yaklaşım.</li>
+        </ul>
+      </section>
+
+      <section class="box">
+        <h2>10 Soruluk Demans Yatkınlığı Farkındalık Ölçeği (5'li Likert)</h2>
+        <p class="muted">Bu araç tanı koymaz; farkındalık ve erken değerlendirme yönlendirmesi amaçlıdır.</p>
+
+        <div class="quiz-head">
+          <span id="progressText">Soru 1/10</span>
+          <span id="answeredText">Yanıtlanan: 0</span>
+        </div>
+        <div class="bar"><div id="barIn"></div></div>
+
+        <div class="q-box">
+          <div class="q-meta" id="qMeta"></div>
+          <p class="q-text" id="qText"></p>
+          <div class="opts" id="opts"></div>
+          <div class="legend">
+            <span>1 = Hiç</span>
+            <span>5 = Çok sık / belirgin</span>
+          </div>
+          <div class="warn" id="warn"></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn soft" id="prevBtn">Geri</button>
+          <button class="btn main" id="nextBtn">İleri</button>
+        </div>
+      </section>
+
+      <section class="box" id="resultBox">
+        <h2>Sonuç ve Öneriler</h2>
+        <p id="resultIntro">Tüm soruları tamamladığında sonuç burada görüntülenecek.</p>
+        <div id="resultBody"></div>
+      </section>
+    </main>
+
+    <script>
+      const questions = [
+        { d: "Bellek", t: "Son dönemde yakın zamanda konuşulanları veya yapılan planları sık unutuyorum." },
+        { d: "Tekrarlama", t: "Aynı soruyu kısa aralıklarla tekrar sorduğum söyleniyor." },
+        { d: "Dil", t: "Konuşurken kelime bulmakta belirgin zorlanıyorum." },
+        { d: "Yönelim", t: "Tanıdık ortamlarda yönümü bulmakta zorlandığım oluyor." },
+        { d: "Yürütücü işlev", t: "Günlük işleri planlama ve sıraya koyma konusunda zorlanıyorum." },
+        { d: "Dikkat", t: "Bir işe odaklanma ve sürdürme kapasitem belirgin azaldı." },
+        { d: "İşlevsellik", t: "Fatura, ilaç, randevu gibi rutin takip işlerinde aksama yaşıyorum." },
+        { d: "Karar verme", t: "Eskisine göre daha sık hatalı karar verdiğimi düşünüyorum." },
+        { d: "Davranış/duygu", t: "Son dönemde kişilikte, davranışta veya duygusal tepkilerde belirgin değişim oldu." },
+        { d: "Aile gözlemi", t: "Yakınlarım bilişsel işlevlerimde fark edilir bir gerileme olduğunu söylüyor." }
+      ];
+
+      const labels = ["1<br>Hiç", "2<br>Nadiren", "3<br>Bazen", "4<br>Sık", "5<br>Çok sık"];
+      const answers = Array(questions.length).fill(null);
+      let idx = 0;
+
+      const qMeta = document.getElementById("qMeta");
+      const qText = document.getElementById("qText");
+      const opts = document.getElementById("opts");
+      const warn = document.getElementById("warn");
+      const progressText = document.getElementById("progressText");
+      const answeredText = document.getElementById("answeredText");
+      const barIn = document.getElementById("barIn");
+      const resultIntro = document.getElementById("resultIntro");
+      const resultBody = document.getElementById("resultBody");
+
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        if (idx > 0) {
+          idx -= 1;
+          drawQuestion();
+        }
+      });
+
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        if (answers[idx] == null) {
+          warn.textContent = "Devam etmek için bu soruyu puanla.";
+          return;
+        }
+        warn.textContent = "";
+        if (idx < questions.length - 1) {
+          idx += 1;
+          drawQuestion();
+        } else {
+          renderResult();
+        }
+      });
+
+      function setAnswer(v) {
+        answers[idx] = v;
+        drawQuestion();
+      }
+
+      function drawQuestion() {
+        qMeta.textContent = `Boyut: ${questions[idx].d}`;
+        qText.textContent = questions[idx].t;
+        progressText.textContent = `Soru ${idx + 1}/${questions.length}`;
+        const done = answers.filter((x) => x != null).length;
+        answeredText.textContent = `Yanıtlanan: ${done}`;
+        barIn.style.width = `${(done / questions.length) * 100}%`;
+        document.getElementById("nextBtn").textContent = idx === questions.length - 1 ? "Sonucu Gör" : "İleri";
+
+        opts.innerHTML = labels
+          .map((l, i) => {
+            const val = i + 1;
+            const active = answers[idx] === val ? "active" : "";
+            return `<label class="opt ${active}"><input type="radio" ${answers[idx] === val ? "checked" : ""}/><span>${l}</span></label>`;
+          })
+          .join("");
+
+        [...opts.querySelectorAll(".opt")].forEach((el, i) => {
+          el.addEventListener("click", () => setAnswer(i + 1));
+        });
+      }
+
+      function level(total) {
+        if (total <= 19) return { cls: "b-low", name: "Düşük Düzey Bulgular", text: "Belirgin bir risk görünmüyor; koruyucu yaşam alışkanlıklarını sürdür." };
+        if (total <= 29) return { cls: "b-mid", name: "İzlem Gerektiren Düzey", text: "Belirtiler hafif-orta düzeyde; düzenli takip ve hekim görüşmesi faydalı olabilir." };
+        if (total <= 39) return { cls: "b-high", name: "Artmış Risk Düzeyi", text: "Belirtiler belirginleşmiş görünüyor; nöroloji/psikiyatri değerlendirmesi önerilir." };
+        return { cls: "b-vhigh", name: "Yüksek Risk Düzeyi", text: "Belirtiler yoğun; ayrıntılı klinik değerlendirmeyi geciktirmeden planla." };
+      }
+
+      function renderResult() {
+        const total = answers.reduce((a, b) => a + b, 0);
+        const avg = (total / answers.length).toFixed(2);
+        const risk = level(total);
+
+        resultIntro.innerHTML = `<span class="badge ${risk.cls}">${risk.name}</span> Toplam skor: <strong>${total}/50</strong> (Ort: ${avg}/5) - ${risk.text}`;
+        resultBody.innerHTML = `
+          <p><strong>Önerilen adımlar:</strong></p>
+          <ul class="list">
+            <li>Yakın geçmiş unutkanlıklarını 2-4 hafta boyunca kısa notlarla takip et.</li>
+            <li>Tansiyon, şeker, uyku ve fiziksel aktivite düzenini optimize et.</li>
+            <li>Yakın çevrenden işlevsellik değişimi hakkında geri bildirim al.</li>
+            <li>Belirtiler sürerse nöroloji veya geriatri değerlendirmesi planla.</li>
+            <li>Gerekirse nöropsikolojik test ve beyin görüntüleme ile ayrıntılı inceleme yap.</li>
+          </ul>
+          <div class="foot">
+            Bu ölçek tanı koymaz ve tıbbi muayenenin yerine geçmez. Ani bilinç değişikliği, konuşma bozukluğu,
+            tek taraflı güçsüzlük veya hızlı kötüleşme durumlarında acil sağlık hizmetine başvur.
+          </div>
+        `;
+
+        document.getElementById("resultBox").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      drawQuestion();
+    </script>
+  </body>
+</html>
