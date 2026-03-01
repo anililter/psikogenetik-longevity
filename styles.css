@@ -2779,16 +2779,29 @@ body {
 }
 }
 
-/* İnteraktif testler liste sayfası */
-.test-cards {
+/* İnteraktif testler liste sayfası — tek satırda 2 kart (zorunlu iki sütun) */
+.section .test-cards {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
   gap: 1.5rem;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
-  .test-cards {
-    grid-template-columns: 1fr;
+/* Kesin iki sütun — diğer kuralları ezer */
+.section--test-cards .test-cards--two-col {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1.5rem !important;
+  width: 100% !important;
+}
+
+.section--test-cards .test-cards--two-col .test-card {
+  min-width: 0; /* grid overflow engeli */
+}
+
+@media (max-width: 600px) {
+  .section--test-cards .test-cards--two-col {
+    grid-template-columns: 1fr !important;
   }
 }
 

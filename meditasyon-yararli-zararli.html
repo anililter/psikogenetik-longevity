@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WQBD9XMN');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meditasyon: Yararlı mı, Zararlı mı? | İnteraktif Rehber | P&amp;L</title>
+  <meta name="description" content="Kln. Psk. Asiye Usluca ile meditasyon hakkında mit/gerçek quiz ve nefes egzersizi. Bilimsel gerçekler ve interaktif deneyim.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700&family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+  <style>
+    .meditasyon-inner { --my-dark: #0a0a0a; --my-yellow: #f4e836; --my-teal: #234B54; --my-card: #1e1e1e; --my-text: #f5f5f5; --my-muted: #a0a0a0; background: var(--my-dark); color: var(--my-text); padding-bottom: 3rem; }
+    .meditasyon-inner .hero { min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 4rem 5%; background: linear-gradient(to bottom, rgba(10,10,10,0.3), #0a0a0a), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2000&auto=format&fit=crop') center/cover fixed; position: relative; }
+    .meditasyon-inner .hero::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,10,0.6); z-index: 1; }
+    .meditasyon-inner .hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; background: rgba(0,0,0,0.7); padding: 3rem; border-radius: 24px; border: 1px solid rgba(244,232,54,0.2); }
+    .meditasyon-inner .author-tag { font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; border-bottom: 2px solid var(--my-yellow); padding-bottom: 0.3rem; display: inline-block; font-weight: 600; }
+    .meditasyon-inner .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2; margin-bottom: 1rem; color: var(--my-yellow); }
+    .meditasyon-inner .hero-subtitle { font-size: 1.1rem; color: #dcdcdc; margin-bottom: 2rem; line-height: 1.7; }
+    .meditasyon-inner .gamified-btn { background: var(--my-yellow); color: #0a0a0a; font-weight: 800; font-size: 1.1rem; padding: 1rem 2.5rem; border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s, box-shadow 0.3s; }
+    .meditasyon-inner .gamified-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(244,232,54,0.4); }
+    .meditasyon-inner .user-stats { position: fixed; top: 5rem; right: 5%; display: flex; gap: 0.75rem; z-index: 100; }
+    .meditasyon-inner .stat-badge { background: rgba(10,10,10,0.9); border: 1px solid var(--my-yellow); padding: 0.5rem 1rem; border-radius: 30px; font-weight: 600; font-size: 0.9rem; }
+    .meditasyon-inner .quiz-section { padding: 4rem 5%; background: #121212; }
+    .meditasyon-inner .section-header { text-align: center; margin-bottom: 2rem; }
+    .meditasyon-inner .section-header h2 { font-size: 2rem; color: var(--my-yellow); margin-bottom: 0.5rem; }
+    .meditasyon-inner .section-header p { color: var(--my-muted); font-size: 1rem; }
+    .meditasyon-inner .quiz-container { max-width: 700px; margin: 0 auto; background: var(--my-card); border-radius: 20px; padding: 2.5rem; border: 1px solid rgba(255,255,255,0.05); }
+    .meditasyon-inner .progress-bar-container { height: 8px; background: #333; border-radius: 5px; margin-bottom: 2rem; overflow: hidden; }
+    .meditasyon-inner .progress-bar { height: 100%; width: 0; background: linear-gradient(90deg, #d1c618, var(--my-yellow)); transition: width 0.5s ease; }
+    .meditasyon-inner .question-box { display: none; }
+    .meditasyon-inner .question-box.active { display: block; }
+    .meditasyon-inner .question-text { font-size: 1.25rem; margin-bottom: 1.5rem; line-height: 1.5; font-weight: 600; text-align: center; }
+    .meditasyon-inner .options { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .meditasyon-inner .option-btn { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); padding: 1.25rem; border-radius: 12px; color: #fff; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; font-weight: 600; }
+    .meditasyon-inner .option-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+    .meditasyon-inner .option-btn.correct { background: rgba(46,204,113,0.2); border-color: #2ecc71; color: #2ecc71; }
+    .meditasyon-inner .option-btn.wrong { background: rgba(231,76,60,0.2); border-color: #e74c3c; color: #e74c3c; }
+    .meditasyon-inner .feedback { margin-top: 1.5rem; padding: 1.25rem; border-radius: 12px; display: none; font-size: 1rem; line-height: 1.6; background: rgba(255,255,255,0.05); border-left: 4px solid var(--my-yellow); }
+    .meditasyon-inner .feedback.show { display: block; }
+    .meditasyon-inner .next-btn { margin-top: 1rem; background: transparent; color: var(--my-yellow); border: 2px solid var(--my-yellow); padding: 0.75rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 700; width: 100%; display: none; transition: all 0.3s; }
+    .meditasyon-inner .next-btn:hover { background: var(--my-yellow); color: #0a0a0a; }
+    .meditasyon-inner .next-btn[style*="inline-block"] { display: inline-block !important; }
+    .meditasyon-inner .breathe-section { padding: 4rem 5%; text-align: center; background: var(--my-dark); }
+    .meditasyon-inner .breathe-section h2 { font-size: 2rem; margin-bottom: 0.75rem; }
+    .meditasyon-inner .breathe-section p { color: var(--my-muted); margin-bottom: 1.5rem; line-height: 1.6; }
+    .meditasyon-inner .breathe-circle { width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, var(--my-teal) 0%, #12282d 100%); margin: 2rem auto; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; color: var(--my-yellow); cursor: pointer; transition: transform 4s; border: 2px solid rgba(255,255,255,0.1); user-select: none; }
+    .meditasyon-inner .breathe-circle.inhale { transform: scale(1.5); background: radial-gradient(circle, #3a7c8a 0%, var(--my-teal) 100%); }
+    .meditasyon-inner .breathe-instruction { min-height: 2rem; color: var(--my-muted); font-size: 1rem; }
+    .meditasyon-inner .result-quote { background: rgba(244,232,54,0.08); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(244,232,54,0.25); margin: 1.5rem 0; text-align: left; }
+    .meditasyon-inner .result-quote h4 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--my-yellow); }
+    .meditasyon-inner .result-quote p { font-size: 0.95rem; line-height: 1.7; margin: 0; color: var(--my-text); }
+    @media (max-width: 768px) { .meditasyon-inner .options { grid-template-columns: 1fr; } .meditasyon-inner .user-stats { top: 4.5rem; left: 50%; transform: translateX(-50%); right: auto; } }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQBD9XMN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <header class="header">
+    <div class="container container--wide header-inner">
+      <a href="index.html" class="logo">P&amp;L</a>
+      <nav class="nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="calisma-alanlarim.html">Çalışma Alanlarımız</a>
+        <a href="terapi-hizmetleri.html">Terapi Hizmetleri</a>
+        <a href="psikogenetik.html">Psikogenetik</a>
+        <a href="farkimiz.html">Farkımız</a>
+        <a href="interaktif-testler.html">İnteraktif Testler</a>
+        <a href="iletisim.html">İletişim</a>
+      </nav>
+      <div class="header-ctas">
+        <a href="tel:+905454201468" class="btn btn-primary">Hemen arayın</a>
+        <a href="https://wa.me/905454201468" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp Randevu</a>
+      </div>
+      <button class="menu-toggle" aria-label="Menü">☰</button>
+    </div>
+  </header>
+
+  <div class="meditasyon-inner">
+    <div class="user-stats" id="userStats" style="display: none;">
+      <div class="stat-badge" id="pointBadge"><span id="zenPoints">0</span> 🌟 Zen Puanı</div>
+      <div class="stat-badge">🔥 <span id="streak">1</span>. Gün Serisi</div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="author-tag">Kln. Psk. Asiye Usluca</div>
+        <h1 class="hero-title">Meditasyon<br><span style="color: white; font-size: 0.85em; text-transform: none;">Yararlı mı, Zararlı mı?</span></h1>
+        <p class="hero-subtitle">Zihninizin sınırlarını keşfetmeye hazır mısınız? Bilimsel gerçekler, yaygın mitler ve interaktif bir deneyimle kendi içsel yolculuğunuza başlayın ve Zen Puanlarınızı toplayın.</p>
+        <button type="button" class="gamified-btn" id="startBtn">İnteraktif Rehbere Başla 🚀</button>
+      </div>
+    </section>
+
+    <section class="quiz-section" id="quizSection" style="display: none;">
+      <div class="section-header">
+        <h2>Mit mi, Gerçek mi?</h2>
+        <p>Meditasyon hakkındaki tabuları yıkın. Doğru cevapları bulun, puanları toplayın.</p>
+      </div>
+      <div class="quiz-container">
+        <div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="question-box active" id="q1">
+          <div class="question-text">1. Meditasyon yaparken temel amaç zihni "tamamen boşaltmak" ve hiçbir şey düşünmemektir.</div>
+          <div class="options">
+            <button type="button" class="option-btn" data-ans="mit">Mit ❌</button>
+            <button type="button" class="option-btn" data-ans="gercek">Gerçek ✅</button>
+          </div>
+          <div class="feedback" id="feedback1"><strong>Doğru Cevap: MİT!</strong> Meditasyon, düşünceleri durdurmak değil, düşüncelerin farkına varıp onları yargılamadan geçip gitmelerine izin vermektir. <em>(+50 Zen Puanı kazandın!)</em></div>
+          <button type="button" class="next-btn" id="next1">Sonraki Seviye ➡️</button>
+        </div>
+        <div class="question-box" id="q2">
+          <div class="question-text">2. Düzenli meditasyon yapmak, beynin fiziksel yapısını değiştirme (Nöroplastisite) gücüne sahiptir.</div>
+          <div class="options">
+            <button type="button" class="option-btn" data-ans="mit">Mit ❌</button>
+            <button type="button" class="option-btn" data-ans="gercek">Gerçek ✅</button>
+          </div>
+          <div class="feedback" id="feedback2"><strong>Doğru Cevap: GERÇEK!</strong> Araştırmalar, düzenli meditasyonun beynin hafıza, öğrenme ve empati ile ilgili bölgelerinde gri madde yoğunluğunu artırdığını kanıtlamıştır. <em>(+50 Zen Puanı kazandın!)</em></div>
+          <button type="button" class="next-btn" id="next2">Son Karar ➡️</button>
+        </div>
+        <div class="question-box" id="q3">
+          <div class="question-text">3. Yanlış uygulandığında veya hazırlıksız yapıldığında meditasyon psikolojik olarak "zararlı" olabilir.</div>
+          <div class="options">
+            <button type="button" class="option-btn" data-ans="mit">Mit ❌</button>
+            <button type="button" class="option-btn" data-ans="gercek">Gerçek ✅</button>
+          </div>
+          <div class="feedback" id="feedback3"><strong>Doğru Cevap: GERÇEK!</strong> Uzman rehberliği olmadan yapılan yoğun pratikler, bastırılmış travmaları kontrolsüzce yüzeye çıkararak anksiyeteyi tetikleyebilir. <em>(+50 Zen Puanı kazandın!)</em></div>
+          <button type="button" class="next-btn" id="next3">Sonuçları Gör 🏆</button>
+        </div>
+        <div class="question-box" id="resultBox" style="text-align: center;">
+          <h3 style="font-size: 1.75rem; color: var(--my-yellow); margin-bottom: 1rem;">Seviye Tamamlandı! 🎉</h3>
+          <p style="margin-bottom: 1.5rem;">Toplam Skorun: <strong id="finalScore" style="color: var(--my-yellow); font-size: 1.25rem;">0</strong></p>
+          <div class="result-quote">
+            <h4>Kln. Psk. Asiye Usluca Diyor ki:</h4>
+            <p>"Meditasyon mucizevi tek bir hap değildir. Doğru uygulandığında ruhsal bir koruma kalkanı yaratırken, travma geçmişi olan bireylerde bilinçsizce derinlere inmek sarsıcı sonuçlar doğurabilir. Önemli olan, kendi sınırlarınızı bilmek ve gerektiğinde profesyonel destek almaktır."</p>
+          </div>
+          <p style="margin-bottom: 1rem; color: var(--my-muted);">🎁 Ödül olarak bir nefes egzersizi kilit özelliğini açtın!</p>
+          <button type="button" class="gamified-btn" id="toBreatheBtn" style="width: 100%;">Ödül Pratiğine Geç 🧘‍♂️</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="breathe-section" id="breatheSection" style="display: none;">
+      <div style="max-width: 500px; margin: 0 auto;">
+        <h2>Anı Yakala</h2>
+        <p>Aşağıdaki küreye tıkla ve basılı tutarak nefes al, bırakırken yavaşça nefes ver. Her döngü sana +5 Zen Puanı kazandıracak.</p>
+        <div class="breathe-circle" id="breatheCircle"><span id="breatheText" style="text-align: center; line-height: 1.3;">Tıkla &<br>Basılı Tut</span></div>
+        <div class="breathe-instruction" id="breatheInstruction"></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a href="index.html" class="footer__logo">P&amp;L</a>
+            <p class="footer__tagline">Psikogenetik & Longevity — Genetik temelli psikoterapi ve yaşam danışmanlığı.</p>
+          </div>
+          <nav class="footer__nav" aria-label="Sayfa içi bağlantılar">
+            <p class="footer__nav-title">Sayfalar</p>
+            <ul class="footer__links">
+              <li><a href="index.html">Ana Sayfa</a></li>
+              <li><a href="hakkimizda.html">Hakkımızda</a></li>
+              <li><a href="calisma-alanlarim.html">Çalışma Alanlarımız</a></li>
+              <li><a href="terapi-hizmetleri.html">Terapi Hizmetleri</a></li>
+              <li><a href="psikogenetik.html">Psikogenetik</a></li>
+              <li><a href="farkimiz.html">Farkımız</a></li>
+              <li><a href="interaktif-testler.html">İnteraktif Testler</a></li>
+              <li><a href="iletisim.html">İletişim</a></li>
+            </ul>
+          </nav>
+          <div class="footer__contact">
+            <p class="footer__nav-title">İletişim</p>
+            <div class="footer__contact-buttons">
+              <a href="tel:+905454201468" class="btn btn-primary">Hemen arayın</a>
+              <a href="https://wa.me/905454201468" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+            <p class="footer__address">Merdivenköy Mh. Fahrettin Kerim Gökay Cd. 169<br>Çeviköz Apt. K:5 D:11, 34710 Kadıköy / İstanbul</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p class="footer__legal"><a href="#">KVKK Metni</a></p>
+        <p class="footer__copy">© 2025 P&amp;L — Psikogenetik & Longevity</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="fixed-cta" aria-label="İletişim">
+    <a href="tel:+905454201468" class="fixed-cta__btn fixed-cta__call" aria-label="Hemen ara">📞 <span>Hemen Ara</span></a>
+    <a href="https://wa.me/905454201468" class="fixed-cta__btn fixed-cta__whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp ile randevu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span>WhatsApp Randevu</span>
+    </a>
+  </div>
+
+  <script src="script.js?v=5"></script>
+  <script>
+  (function() {
+    var points = 0;
+    var correctAnswers = { 1: 'mit', 2: 'gercek', 3: 'gercek' };
+    function startJourney() {
+      document.getElementById('userStats').style.display = 'flex';
+      document.getElementById('quizSection').style.display = 'block';
+      document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('progressBar').style.width = '0%';
+    }
+    function updateProgress(step) {
+      document.getElementById('progressBar').style.width = ((step - 1) / 3) * 100 + '%';
+    }
+    function addPoints(pts) {
+      points += pts;
+      document.getElementById('zenPoints').textContent = points;
+    }
+    function checkAnswer(qNum, answer, btn) {
+      var isCorrect = correctAnswers[qNum] === answer;
+      var opts = btn.parentElement.querySelectorAll('.option-btn');
+      opts.forEach(function(o) { o.style.pointerEvents = 'none'; });
+      btn.classList.add(isCorrect ? 'correct' : 'wrong');
+      if (!isCorrect) {
+        opts.forEach(function(o) {
+          if ((correctAnswers[qNum] === 'mit' && o.textContent.indexOf('Mit') >= 0) || (correctAnswers[qNum] === 'gercek' && o.textContent.indexOf('Gerçek') >= 0))
+            o.classList.add('correct');
+        });
+      }
+      if (isCorrect) addPoints(50);
+      document.getElementById('feedback' + qNum).classList.add('show');
+      document.getElementById('next' + qNum).style.display = 'inline-block';
+    }
+    function nextQuestion(num) {
+      document.querySelectorAll('.question-box').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('q' + num).classList.add('active');
+      updateProgress(num);
+    }
+    function finishQuiz() {
+      document.querySelectorAll('.question-box').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('resultBox').classList.add('active');
+      document.getElementById('finalScore').textContent = points;
+      document.getElementById('progressBar').style.width = '100%';
+      document.getElementById('breatheSection').style.display = 'block';
+    }
+    document.getElementById('startBtn').onclick = startJourney;
+    document.getElementById('toBreatheBtn').onclick = function() {
+      document.getElementById('breatheSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    [1,2,3].forEach(function(q) {
+      document.querySelectorAll('#q' + q + ' .option-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() { checkAnswer(q, btn.getAttribute('data-ans'), btn); });
+      });
+    });
+    document.getElementById('next1').onclick = function() { nextQuestion(2); };
+    document.getElementById('next2').onclick = function() { nextQuestion(3); };
+    document.getElementById('next3').onclick = finishQuiz;
+    var circle = document.getElementById('breatheCircle');
+    var instruction = document.getElementById('breatheInstruction');
+    var text = document.getElementById('breatheText');
+    var isHolding = false;
+    function startBreathe() {
+      isHolding = true;
+      circle.classList.add('inhale');
+      text.innerHTML = 'Nefes<br>Al...';
+      instruction.textContent = 'Akciğerlerini doldur (4 Saniye)';
+    }
+    function stopBreathe() {
+      if (!isHolding) return;
+      isHolding = false;
+      circle.classList.remove('inhale');
+      text.innerHTML = 'Nefes<br>Ver...';
+      instruction.textContent = 'Yavaşça serbest bırak';
+      addPoints(5);
+      setTimeout(function() {
+        if (!isHolding) { text.innerHTML = 'Tekrar<br>Başla'; instruction.textContent = ''; }
+      }, 3000);
+    }
+    circle.addEventListener('mousedown', startBreathe);
+    window.addEventListener('mouseup', stopBreathe);
+    circle.addEventListener('touchstart', function(e) { e.preventDefault(); startBreathe(); });
+    window.addEventListener('touchend', stopBreathe);
+  })();
+  </script>
+</body>
+</html>
