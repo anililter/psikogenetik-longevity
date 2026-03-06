@@ -1,0 +1,726 @@
+/* Psikolongevity sayfa stilleri — .psikolongevity-page içinde kapsamlanır */
+.psikolongevity-page {
+  --primary: #1B4D3E;
+  --primary-light: #52B788;
+  --secondary: #FFB703;
+  --accent: #FB8500;
+  --dark: #0F172A;
+  --light: #F8FAFC;
+  --surface: rgba(255, 255, 255, 0.75);
+  --surface-dark: rgba(15, 23, 42, 0.85);
+  --text-main: #334155;
+  --text-muted: #64748B;
+  --font-headings: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+  color: var(--text-main);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+.psikolongevity-page * {
+  box-sizing: border-box;
+}
+
+.psikolongevity-page h1,
+.psikolongevity-page h2,
+.psikolongevity-page h3,
+.psikolongevity-page h4 {
+  font-family: var(--font-headings);
+  color: var(--dark);
+  line-height: 1.2;
+}
+
+.psikolongevity-page img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.psikolongevity-page .pl-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.psikolongevity-page .section-padding {
+  padding: 8rem 0;
+}
+
+.psikolongevity-page .glass {
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.psikolongevity-page .glass-dark {
+  background: var(--surface-dark);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--light);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+}
+
+.psikolongevity-page .glass-dark h2,
+.psikolongevity-page .glass-dark h3,
+.psikolongevity-page .glass-dark h4 {
+  color: var(--light);
+}
+
+.psikolongevity-page .text-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.psikolongevity-page .text-gradient-sun {
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.psikolongevity-page ul.custom-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+.psikolongevity-page ul.custom-list li {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 1.05rem;
+}
+
+.psikolongevity-page ul.custom-list li::before {
+  content: '\f058';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  color: var(--primary-light);
+  font-size: 1.25rem;
+  margin-top: 2px;
+}
+
+.psikolongevity-page ul.custom-list.cross-list li::before {
+  content: '\f05c';
+  color: #EF4444;
+}
+
+.psikolongevity-page ul.custom-list.sun-list li::before {
+  content: '\f185';
+  color: var(--secondary);
+}
+
+.psikolongevity-page .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.psikolongevity-page .reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.psikolongevity-page .delay-100 { transition-delay: 100ms; }
+.psikolongevity-page .delay-200 { transition-delay: 200ms; }
+.psikolongevity-page .delay-300 { transition-delay: 300ms; }
+
+@keyframes pl-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pl-pulse-glow {
+  0% { box-shadow: 0 0 0 0 rgba(82, 183, 136, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(82, 183, 136, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(82, 183, 136, 0); }
+}
+
+@keyframes pl-slowZoom {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.15); }
+}
+
+.psikolongevity-page .hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+  padding-top: 4rem;
+}
+
+.psikolongevity-page .hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2670&auto=format&fit=crop') center/cover no-repeat;
+  opacity: 0.8;
+  transform: scale(1.05);
+  animation: pl-slowZoom 20s infinite alternate;
+}
+
+.psikolongevity-page .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(27, 77, 62, 0.5) 100%);
+  z-index: 1;
+}
+
+.psikolongevity-page .hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.psikolongevity-page .hero-card {
+  max-width: 800px;
+  padding: 4rem;
+}
+
+.psikolongevity-page .hero-tag {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: var(--secondary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.psikolongevity-page .hero h1 {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  color: #fff;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.psikolongevity-page .hero p {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+}
+
+.psikolongevity-page .hero .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: var(--primary-light);
+  color: #fff;
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  animation: pl-pulse-glow 2s infinite;
+}
+
+.psikolongevity-page .hero .btn:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(27, 77, 62, 0.3);
+}
+
+.psikolongevity-page .intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.psikolongevity-page .intro-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.psikolongevity-page .intro-text p {
+  font-size: 1.15rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+}
+
+.psikolongevity-page .intro-image-wrapper {
+  position: relative;
+}
+
+.psikolongevity-page .intro-image {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  animation: pl-float 6s ease-in-out infinite;
+}
+
+.psikolongevity-page .intro-blob {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-light);
+  border-radius: 20px;
+  opacity: 0.2;
+  z-index: -1;
+  transform: rotate(-3deg);
+}
+
+.psikolongevity-page .seasons-section {
+  background: #fff;
+  position: relative;
+}
+
+.psikolongevity-page .section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem auto;
+}
+
+.psikolongevity-page .section-header h2 {
+  font-size: 2.75rem;
+  margin-bottom: 1rem;
+}
+
+.psikolongevity-page .section-header p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.psikolongevity-page .compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.psikolongevity-page .compare-card {
+  padding: 3rem;
+  border-radius: 24px;
+  transition: transform 0.3s ease;
+}
+
+.psikolongevity-page .compare-card:hover {
+  transform: translateY(-10px);
+}
+
+.psikolongevity-page .winter-card {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border: 1px solid #cbd5e1;
+}
+
+.psikolongevity-page .spring-card {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1px solid #bbf7d0;
+  position: relative;
+}
+
+.psikolongevity-page .spring-card::after {
+  content: '\f185';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  top: -20px;
+  right: 30px;
+  font-size: 4rem;
+  color: var(--secondary);
+  opacity: 0.3;
+}
+
+.psikolongevity-page .compare-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.psikolongevity-page .winter-card h3 i { color: #3b82f6; }
+.psikolongevity-page .spring-card h3 i { color: var(--primary-light); }
+
+.psikolongevity-page .fatigue-section {
+  background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+  color: white;
+  padding: 6rem 0;
+  position: relative;
+}
+
+.psikolongevity-page .fatigue-grid {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.psikolongevity-page .fatigue-grid h2 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.psikolongevity-page .fatigue-grid p {
+  color: #94a3b8;
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+}
+
+.psikolongevity-page .fatigue-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2.5rem;
+  border-radius: 20px;
+}
+
+.psikolongevity-page .fatigue-box h3 {
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.psikolongevity-page .fatigue-box ul.custom-list li {
+  color: #e2e8f0;
+}
+
+.psikolongevity-page .slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.psikolongevity-page .slider-btn {
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  color: var(--primary);
+  border: 1px solid rgba(82, 183, 136, 0.3);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+.psikolongevity-page .slider-btn:hover {
+  background: var(--primary-light);
+  color: white;
+  transform: scale(1.1);
+}
+
+.psikolongevity-page .prev-btn { left: -25px; }
+.psikolongevity-page .next-btn { right: -25px; }
+
+.psikolongevity-page .strategies-grid {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1rem 0 3rem 0;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.psikolongevity-page .strategies-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.psikolongevity-page .strategy-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 350px;
+  max-width: 85vw;
+  scroll-snap-align: center;
+}
+
+.psikolongevity-page .strategy-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 40px rgba(82, 183, 136, 0.15);
+  border-color: rgba(82, 183, 136, 0.3);
+}
+
+.psikolongevity-page .strategy-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.psikolongevity-page .strategy-card:hover::before {
+  transform: scaleX(1);
+}
+
+.psikolongevity-page .icon-box {
+  width: 60px;
+  height: 60px;
+  background: var(--light);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.psikolongevity-page .strategy-card:hover .icon-box {
+  background: var(--primary-light);
+  color: white;
+  transform: rotate(10deg);
+}
+
+.psikolongevity-page .strategy-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--dark);
+}
+
+.psikolongevity-page .strategy-card p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.psikolongevity-page .strategy-card .question-box {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 12px;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--primary);
+  border-left: 4px solid var(--primary-light);
+  margin-top: 1rem;
+}
+
+.psikolongevity-page .strategy-card .question-box p {
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.psikolongevity-page .strategy-card .question-box p:last-child {
+  margin-bottom: 0;
+}
+
+.psikolongevity-page .connection-section {
+  background: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2620&auto=format&fit=crop') center/cover fixed;
+  position: relative;
+}
+
+.psikolongevity-page .connection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.psikolongevity-page .connection-content {
+  position: relative;
+  z-index: 2;
+}
+
+.psikolongevity-page .connection-flex {
+  display: flex;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.psikolongevity-page .connection-box {
+  flex: 1;
+  padding: 3rem;
+}
+
+.psikolongevity-page .danger-box {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.psikolongevity-page .danger-box h3 {
+  color: #b91c1c;
+}
+
+.psikolongevity-page .success-box {
+  background: rgba(82, 183, 136, 0.05);
+  border: 1px solid rgba(82, 183, 136, 0.2);
+}
+
+.psikolongevity-page .success-box h3 {
+  color: var(--primary);
+}
+
+.psikolongevity-page .conclusion {
+  text-align: center;
+  padding: 8rem 0;
+  background: linear-gradient(to bottom, #f0fdf4 0%, #ffffff 100%);
+}
+
+.psikolongevity-page .conclusion h2 {
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+}
+
+.psikolongevity-page .conclusion p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  color: var(--text-muted);
+}
+
+.psikolongevity-page .checklist-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.psikolongevity-page .check-item {
+  background: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 500;
+  color: var(--primary);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(82, 183, 136, 0.2);
+}
+
+.psikolongevity-page .check-item i {
+  color: var(--primary-light);
+  font-size: 1.2rem;
+}
+
+.psikolongevity-page .finale-text {
+  font-family: var(--font-headings);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem;
+  background: var(--secondary);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(255, 183, 3, 0.3);
+}
+
+@media (max-width: 992px) {
+  .psikolongevity-page .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .psikolongevity-page .hero h1 {
+    font-size: 3.5rem;
+  }
+  .psikolongevity-page .compare-grid,
+  .psikolongevity-page .fatigue-grid,
+  .psikolongevity-page .connection-flex {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .psikolongevity-page .intro-image {
+    height: 400px;
+  }
+  .psikolongevity-page .prev-btn { left: 10px; }
+  .psikolongevity-page .next-btn { right: 10px; }
+  .psikolongevity-page .slider-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .psikolongevity-page .section-padding {
+    padding: 4rem 0;
+  }
+  .psikolongevity-page .pl-container {
+    padding: 0 1.5rem;
+  }
+  .psikolongevity-page .hero-card {
+    padding: 2rem 1.5rem;
+  }
+  .psikolongevity-page .hero h1 {
+    font-size: 2.5rem;
+  }
+  .psikolongevity-page .hero p {
+    font-size: 1.1rem;
+  }
+  .psikolongevity-page .section-header h2,
+  .psikolongevity-page .intro-text h2,
+  .psikolongevity-page .fatigue-grid h2 {
+    font-size: 2rem;
+  }
+  .psikolongevity-page .conclusion h2 {
+    font-size: 2.25rem;
+  }
+  .psikolongevity-page .check-item {
+    width: 100%;
+    justify-content: center;
+  }
+  .psikolongevity-page .strategy-card {
+    padding: 1.75rem;
+  }
+  .psikolongevity-page .compare-card,
+  .psikolongevity-page .fatigue-box,
+  .psikolongevity-page .connection-box {
+    padding: 1.75rem;
+  }
+  .psikolongevity-page .intro-image {
+    height: 300px;
+  }
+  .psikolongevity-page .finale-text {
+    font-size: 1.25rem;
+    padding: 2rem;
+  }
+}
