@@ -75,6 +75,67 @@ body {
   color: var(--color-accent);
 }
 
+/* Psikolongevity alt menü (dropdown) */
+.nav__item--has-sub {
+  position: relative;
+}
+
+.nav__item--has-sub .nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav__item--has-sub .nav__sub-icon {
+  font-size: 0.65rem;
+  transition: transform 0.2s ease;
+}
+
+.nav__item--has-sub:hover .nav__sub-icon,
+.nav__item--has-sub.nav__sub-open .nav__sub-icon {
+  transform: rotate(180deg);
+}
+
+.nav__sub {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0.5rem);
+  min-width: 220px;
+  padding: 0.5rem 0;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nav__item--has-sub:hover .nav__sub,
+.nav__item--has-sub.nav__sub-open .nav__sub {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav__sub a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav__sub a:hover {
+  background: var(--color-accent-light);
+  color: var(--color-primary);
+}
+
 /* ========== Header ========== */
 .header {
   position: fixed;
@@ -2470,6 +2531,27 @@ body {
   padding: 1.5rem;
   border-bottom: 1px solid var(--color-border-strong);
   box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 1023px) {
+  .nav__sub {
+    position: static;
+    transform: none;
+    display: none;
+    padding-left: 1rem;
+    margin-top: 0.25rem;
+    box-shadow: none;
+    background: transparent;
+    border: none;
+  }
+  .nav__item--has-sub.nav__sub-open .nav__sub {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+  .nav__item--has-sub .nav__link {
+    pointer-events: auto;
+  }
 }
 
 /* ========== İnteraktif test / quiz sayfaları ========== */

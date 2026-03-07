@@ -11,6 +11,20 @@
     });
   }
 
+  // Psikolongevity alt menü: mobilde tıklanınca aç/kapa
+  var navSubParent = document.querySelector('.nav__item--has-sub');
+  if (navSubParent) {
+    var navSubLink = navSubParent.querySelector('.nav__link');
+    if (navSubLink) {
+      navSubLink.addEventListener('click', function (e) {
+        if (window.innerWidth <= 1023 && nav && nav.classList.contains('open')) {
+          e.preventDefault();
+          navSubParent.classList.toggle('nav__sub-open');
+        }
+      });
+    }
+  }
+
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
