@@ -75,9 +75,11 @@ body {
   color: var(--color-accent);
 }
 
-/* Psikolongevity alt menü (dropdown) */
+/* Alt menü (dropdown) */
 .nav__item--has-sub {
   position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav__item--has-sub .nav__link {
@@ -155,7 +157,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.nav {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+/* Nav öğeleri eşit aralıklı, küçülmeyen */
+.nav > a,
+.nav > .nav__item--has-sub {
+  flex: 0 0 auto;
 }
 
 .logo {
@@ -169,7 +183,10 @@ body {
 
 .nav {
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  max-width: 100%;
 }
 
 .nav a {
@@ -177,7 +194,20 @@ body {
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
+  white-space: nowrap;
   transition: color var(--transition);
+}
+
+/* Dropdown ana linki nav ile aynı hizada */
+.nav__item--has-sub .nav__link {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav__item--has-sub .nav__link:hover {
+  color: var(--color-accent);
 }
 
 .nav a:hover {

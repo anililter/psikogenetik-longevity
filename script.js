@@ -11,9 +11,8 @@
     });
   }
 
-  // Psikolongevity alt menü: mobilde tıklanınca aç/kapa
-  var navSubParent = document.querySelector('.nav__item--has-sub');
-  if (navSubParent) {
+  // Alt menüler (Biz Kimiz, Psikolongevity): mobilde tıklanınca aç/kapa
+  document.querySelectorAll('.nav__item--has-sub').forEach(function (navSubParent) {
     var navSubLink = navSubParent.querySelector('.nav__link');
     if (navSubLink) {
       navSubLink.addEventListener('click', function (e) {
@@ -23,7 +22,7 @@
         }
       });
     }
-  }
+  });
 
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {

@@ -129,8 +129,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="index.html" class="logo">P&amp;L</a>
       <nav class="nav">
         <a href="index.html">Ana Sayfa</a>
-        <a href="hakkimizda.html">Hakkımızda</a>
-        <a href="calisma-alanlarim.html">Çalışma Alanlarımız</a>
+        <span class="nav__item nav__item--has-sub">
+          <a href="hakkimizda.html" class="nav__link">Biz Kimiz <span class="nav__sub-icon" aria-hidden="true">▾</span></a>
+          <ul class="nav__sub">
+            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+            <li><a href="calisma-alanlarim.html">Çalışma Alanlarımız</a></li>
+            <li><a href="farkimiz.html">Farkımız</a></li>
+          </ul>
+        </span>
         <a href="terapi-hizmetleri.html">Terapi Hizmetleri</a>
         <a href="psikogenetik.html">Psikogenetik</a>
         <span class="nav__item nav__item--has-sub">
@@ -140,8 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="longevity.html">10 Uzun Ömür Stratejisi</a></li>
           </ul>
         </span>
-        <a href="farkimiz.html">Farkımız</a>
-        <a href="interaktif-testler.html">İnteraktif Testler</a>
+        <a href="interaktif-testler.html" class="nav__active">İnteraktif Testler</a>
         <a href="iletisim.html">İletişim</a>
       </nav>
       <div class="header-ctas">
