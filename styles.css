@@ -2549,7 +2549,7 @@ body {
   }
 }
 
-/* Mobile nav (optional open state) */
+/* Mobile nav (open state) */
 .nav.open {
   display: flex;
   flex-direction: column;
@@ -2557,31 +2557,72 @@ body {
   top: 60px;
   left: 0;
   right: 0;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   background: var(--color-surface);
-  padding: 1.5rem;
+  padding: 1rem 1.25rem 1.5rem;
   border-bottom: 1px solid var(--color-border-strong);
   box-shadow: var(--shadow-soft);
+  z-index: 99;
+  gap: 0;
 }
 
+/* Mobil menü: öğeler üst üste binmesin, düzgün dizilsin */
 @media (max-width: 1023px) {
+  .nav.open > a,
+  .nav.open > .nav__item--has-sub {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .nav.open > a:last-child,
+  .nav.open > .nav__item--has-sub:last-child {
+    border-bottom: none;
+  }
+  .nav.open .nav__item--has-sub .nav__link {
+    padding: 0.25rem 0;
+  }
   .nav__sub {
     position: static;
     transform: none;
     display: none;
-    padding-left: 1rem;
-    margin-top: 0.25rem;
+    padding: 0.5rem 0 0 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
     box-shadow: none;
     background: transparent;
     border: none;
+    min-width: auto;
   }
   .nav__item--has-sub.nav__sub-open .nav__sub {
     display: block;
     opacity: 1;
     visibility: visible;
   }
+  .nav__sub li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav__sub a {
+    display: block;
+    padding: 0.6rem 0;
+    border: none;
+  }
   .nav__item--has-sub .nav__link {
     pointer-events: auto;
   }
+}
+
+/* Menü açıkken arka plan kaymasın (mobil) */
+body.menu-open {
+  overflow: hidden;
 }
 
 /* ========== İnteraktif test / quiz sayfaları ========== */

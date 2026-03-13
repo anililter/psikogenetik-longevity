@@ -6,8 +6,18 @@
   var nav = document.querySelector('.nav');
   if (menuToggle && nav) {
     menuToggle.addEventListener('click', function () {
+      var isOpen = !nav.classList.contains('open');
       nav.classList.toggle('open');
-      menuToggle.setAttribute('aria-expanded', nav.classList.contains('open'));
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      document.body.classList.toggle('menu-open', isOpen);
+    });
+    // Ekran genişleyince menüyü kapat (üst üste kayma kalmasın)
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1023 && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
@@ -33,7 +43,11 @@
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (nav && nav.classList.contains('open')) nav.classList.remove('open');
+        if (nav && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          document.body.classList.remove('menu-open');
+          if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+        }
       }
     });
   });
