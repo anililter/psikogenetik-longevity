@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9 Tip Mizaç Testi (Enneagram)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #0f172a; /* Fallback */
+            color: #f8fafc;
+        }
+        
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 1.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.5);
+            background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary.selected {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: #6366f1;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .progress-bar {
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.5); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8); 
+        }
+
+        .hidden-view {
+            display: none !important;
+        }
+        
+        .type-badge {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-center items-center relative p-4 lg:p-8">
+
+    <!-- Three.js Background -->
+    <div id="canvas-container"></div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="w-full max-w-4xl relative z-10 glass-panel overflow-hidden animate-fade-in">
+        
+        <!-- HERO SECTION -->
+        <section id="hero-view" class="p-8 md:p-16 text-center">
+            <div class="inline-block p-3 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-6 font-semibold tracking-wider text-indigo-300 text-sm uppercase">
+                Kendini Keşfet
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300">
+                9 Tip Mizaç Testi
+            </h1>
+            <p class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                Bu test klinik tanı koymaz, kişilik farkındalığı sağlar. 90 soru ile Enneagram temelli mizaç tipini bulacak ve senin için en uygun partner ve ilişki dinamiklerini önereceğiz.
+            </p>
+            
+            <div class="bg-slate-800/40 p-6 rounded-2xl border border-slate-700/50 mb-10 text-left max-w-lg mx-auto backdrop-blur-sm">
+                <h3 class="text-white font-medium mb-3 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Nasıl Çözmelisiniz?
+                </h3>
+                <ul class="text-sm text-slate-400 space-y-2">
+                    <li class="flex items-start"><span class="text-indigo-400 mr-2">•</span> Her ifade için 1 (Hiç yansıtmıyor) ile 5 (Tam yansıtıyor) arası puan verin.</li>
+                    <li class="flex items-start"><span class="text-indigo-400 mr-2">•</span> Olmak istediğiniz kişiye göre değil, gerçekte nasıl olduğunuza göre dürüstçe yanıtlayın.</li>
+                    <li class="flex items-start"><span class="text-indigo-400 mr-2">•</span> Test ortalama 5-7 dakika sürmektedir.</li>
+                </ul>
+            </div>
+
+            <button id="start-btn" class="btn-primary text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg tracking-wide hover:scale-105 active:scale-95 transition-transform">
+                Teste Başla
+            </button>
+        </section>
+
+        <!-- TEST SECTION -->
+        <section id="test-view" class="p-6 md:p-12 hidden-view flex-col h-full min-h-[500px]">
+            <!-- Progress Header -->
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-xl font-bold text-white mb-2">Mizaç Testi</h2>
+                    <p class="text-sm text-indigo-300" id="question-counter">Soru 1 / 90</p>
+                </div>
+                <!-- Progress Line -->
+                <div class="w-1/2 bg-slate-800 rounded-full h-2.5 border border-slate-700">
+                    <div id="progress-bar" class="progress-bar bg-gradient-to-r from-indigo-500 to-purple-500 h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Question Area -->
+            <div class="flex-grow flex flex-col justify-center py-8">
+                <h3 id="question-text" class="text-2xl md:text-3xl font-medium text-white mb-10 text-center leading-tight">
+                    İşlerin doğru, düzenli ve hatasız yapılmasına çok önem veririm.
+                </h3>
+
+                <!-- Options Grid -->
+                <!-- 1 to 5 scale -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-3xl mx-auto w-full mb-8">
+                    <button class="option-btn btn-secondary py-4 px-2 rounded-xl flex flex-col items-center justify-center gap-2 group" data-value="1">
+                        <span class="text-2xl font-bold text-slate-400 group-hover:text-white transition-colors">1</span>
+                        <span class="text-xs text-center text-slate-500 group-hover:text-slate-300 transition-colors">Hiç beni yansıtmıyor</span>
+                    </button>
+                    <button class="option-btn btn-secondary py-4 px-2 rounded-xl flex flex-col items-center justify-center gap-2 group" data-value="2">
+                        <span class="text-2xl font-bold text-slate-400 group-hover:text-white transition-colors">2</span>
+                        <span class="text-xs text-center text-slate-500 group-hover:text-slate-300 transition-colors">Pek beni yansıtmıyor</span>
+                    </button>
+                    <button class="option-btn btn-secondary py-4 px-2 rounded-xl flex flex-col items-center justify-center gap-2 group" data-value="3">
+                        <span class="text-2xl font-bold text-indigo-400 group-hover:text-indigo-300 transition-colors">3</span>
+                        <span class="text-xs text-center text-slate-400 group-hover:text-slate-300 transition-colors">Kısmen yansıtıyor</span>
+                    </button>
+                    <button class="option-btn btn-secondary py-4 px-2 rounded-xl flex flex-col items-center justify-center gap-2 group" data-value="4">
+                        <span class="text-2xl font-bold text-purple-400 group-hover:text-purple-300 transition-colors">4</span>
+                        <span class="text-xs text-center text-slate-400 group-hover:text-slate-300 transition-colors">Oldukça yansıtıyor</span>
+                    </button>
+                    <button class="option-btn btn-secondary py-4 px-2 rounded-xl flex flex-col items-center justify-center gap-2 group" data-value="5">
+                        <span class="text-2xl font-bold text-fuchsia-400 group-hover:text-fuchsia-300 transition-colors">5</span>
+                        <span class="text-xs text-center text-slate-400 group-hover:text-slate-300 transition-colors">Tam beni yansıtıyor</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="flex justify-between items-center mt-auto border-t border-slate-700/50 pt-6">
+                <button id="prev-btn" class="text-slate-400 hover:text-white transition-colors flex items-center px-4 py-2 font-medium opacity-50 cursor-not-allowed">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    Geri
+                </button>
+                <div class="text-sm text-slate-500">Seçim yaparak ilerleyin</div>
+                <button id="next-btn" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg shadow-md hidden">
+                    Sonraki
+                    <svg class="w-5 h-5 ml-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+                <button id="finish-btn" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg shadow-md hidden">
+                    Sonucu Gör
+                </button>
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION -->
+        <section id="results-view" class="p-6 md:p-12 hidden-view">
+            <div class="text-center mb-10">
+                <div class="inline-block p-2 rounded-full bg-green-500/10 border border-green-500/20 mb-4 font-semibold tracking-wider text-green-400 text-sm uppercase animate-fade-in">
+                    Test Tamamlandı
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">
+                    Baskın Mizacınız
+                </h2>
+                <!-- Dominant Type Info -->
+                <div class="glass-panel p-8 mt-6 border-indigo-500/30 glow">
+                    <div class="flex justify-center mb-4">
+                        <span id="res-type-num" class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-indigo-400 to-purple-500">
+                            Tip 1
+                        </span>
+                    </div>
+                    <h3 id="res-type-title" class="text-2xl font-bold text-white mb-2">
+                        Mükemmeliyetçi / Reformcu
+                    </h3>
+                    <div class="flex flex-wrap justify-center gap-2 mb-6" id="res-type-tags">
+                        <span class="px-3 py-1 rounded-full text-xs font-medium type-badge text-indigo-200">Düzen</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium type-badge text-indigo-200">Doğruluk</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium type-badge text-indigo-200">İlke</span>
+                    </div>
+                    <p id="res-type-desc" class="text-slate-300 leading-relaxed text-sm md:text-base max-w-2xl mx-auto">
+                        ...
+                    </p>
+                </div>
+            </div>
+
+            <!-- Relationship & Partner Recommendations -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                <!-- Recommended Partner -->
+                <div class="bg-gradient-to-br from-indigo-900/40 to-slate-900/40 border border-indigo-500/20 p-6 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">İdeal Partner Tipleri</h4>
+                    </div>
+                    <p class="text-slate-300 text-sm mb-4">Senin mizacın için uyumu yakalayabileceğin ve birbirinizi dengeleyeceğiniz enneagram profilleri:</p>
+                    <div id="res-partner-types" class="space-y-3">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Relationship Dynamics -->
+                <div class="bg-gradient-to-br from-purple-900/40 to-slate-900/40 border border-purple-500/20 p-6 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">İlişki Dinamikleri</h4>
+                    </div>
+                    <p id="res-relationship-advice" class="text-slate-300 text-sm leading-relaxed">
+                       ...
+                    </p>
+                </div>
+            </div>
+
+            <!-- Scores Breakdown Chart -->
+            <div>
+                <h4 class="text-lg font-bold text-white mb-4">Tüm Mizaç Skorları <span class="text-sm font-normal text-slate-400">(Maks. 50 Puan)</span></h4>
+                <div class="bg-slate-800/30 p-5 rounded-xl border border-slate-700/50" id="scores-container">
+                    <!-- Progress bars injected via JS -->
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <button id="restart-btn" class="btn-secondary py-3 px-8 rounded-full text-white font-medium hover:text-indigo-300 transition-colors">
+                    Testi Yeniden Çöz
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS LOGIC -->
+    <script>
+        // 1. DATA: 90 Questions
+        const questionsData = [
+            // Tip 1 - Mükemmeliyetçi
+            "İşlerin doğru, düzenli ve hatasız yapılmasına çok önem veririm.", "Yanlış gördüğüm şeyleri düzeltme isteğim güçlüdür.", "Kendime karşı oldukça eleştirel olabilirim.", "Sorumluluklarımı aksatmamaya çalışırım.", "İnsanların daha disiplinli olması gerektiğini düşünürüm.", "İçimde “böyle olmamalı” diyen bir ses sık sık çalışır.", "Hata yapınca uzun süre rahatsızlık hissederim.", "Kontrolsüzlük ve dağınıklık beni gerer.", "Ahlaki olarak doğru olanı yapmaya çalışırım.", "Gevşemek bazen benim için zor olabilir.",
+            // Tip 2 - Yardımsever
+            "İnsanların ihtiyaçlarını hızlı fark ederim.", "Yardım etmek bana kendimi değerli hissettirir.", "Sevildiğimi hissetmek benim için çok önemlidir.", "Başkaları için fazladan çaba göstermeye yatkınım.", "Kendi ihtiyaçlarımı geri plana atabilirim.", "Yakın olduğum insanların bana ihtiyaç duymasını isterim.", "İnsanlarla sıcak ve yakın ilişkiler kurmak benim için önemlidir.", "Takdir görmeyince kırılabilirim.", "Birine destek olamadığımda suçluluk hissedebilirim.", "Bazen fazla verici olduğumu fark ederim.",
+            // Tip 3 - Başaran
+            "Başarılı görünmek benim için önemlidir.", "Hedef koyduğumda ona ulaşmak için çok çalışırım.", "Verimli ve sonuç odaklı biri olduğumu düşünürüm.", "İnsanların beni başarılı görmesini isterim.", "Zayıf görünmekten hoşlanmam.", "Duygularımdan çok performansıma odaklanabilirim.", "Rekabet beni motive eder.", "Boş durmak bana zaman kaybı gibi gelebilir.", "İmaj ve etki yaratmak benim için önemlidir.", "Başarısızlık beni derinden rahatsız eder.",
+            // Tip 4 - Bireyci
+            "Kendimi diğer insanlardan farklı hissederim.", "Duygularımı yoğun yaşarım.", "Sıradan olmak istemem.", "İç dünyam benim için çok önemlidir.", "Beni gerçekten anlayan insan sayısı azdır diye düşünürüm.", "Estetik, anlam ve derinlik beni çok etkiler.", "Bazen eksik veya tamamlanmamış hissederim.", "Ruh halim sık değişebilir.", "Özgünlük benim için başarıdan daha önemli olabilir.", "Melankoliye yatkın olabilirim.",
+            // Tip 5 - Gözlemci
+            "Geri çekilip gözlem yapmak bana iyi gelir.", "Bilgi toplamak ve anlamak benim için çok önemlidir.", "Fazla sosyal etkileşim beni yorabilir.", "Duygudan çok analizle hareket etme eğilimindeyim.", "Kendi alanıma ve sınırlarıma ihtiyaç duyarım.", "Hazır olmadan kendimi ortaya koymak istemem.", "Merak ettiğim konularda derinleşmeyi severim.", "İnsanlardan çok fikirlerle vakit geçirmek bana çekici gelebilir.", "Enerjimi korumak için geri planda kalabilirim.", "Yetersiz bilgiyle hareket etmek beni rahatsız eder.",
+            // Tip 6 - Sorgulayıcı
+            "Olası riskleri önceden düşünürüm.", "Güven benim için çok temel bir ihtiyaçtır.", "İnsanlara hemen güvenmem.", "Bir konuda karar vermeden önce olası sorunları hesaba katarım.", "Belirsizlik beni zorlar.", "Bazen en kötü senaryoları düşünürüm.", "Sadakat benim için çok önemlidir.", "Otoriteyi bazen sorgular, bazen ona dayanırım.", "İçimde hem cesur hem de kaygılı bir taraf vardır.", "Kendimi güvende hissettiğim insanlara çok bağlanırım.",
+            // Tip 7 - Maceracı
+            "Yeni deneyimler beni çok heyecanlandırır.", "Sıkılmaktan hiç hoşlanmam.", "Hayatın keyifli tarafına odaklanmayı severim.", "Olumsuz duygulardan kaçınma eğilimim olabilir.", "Aynı anda birçok fikir ve plan üretebilirim.", "Kendimi kısıtlanmış hissetmek beni rahatsız eder.", "Özgürlük benim için çok önemlidir.", "Eğlenceli ve enerjik biri olarak görülürüm.", "Acı veren konuları hızlı geçmeye çalışabilirim.", "Seçeneklerin fazla olması beni mutlu eder.",
+            // Tip 8 - Meydan Okuyan
+            "Güçlü görünmek benim için önemlidir.", "Kontrolü başkasına bırakmaktan hoşlanmam.", "Haksızlığa sert tepki verebilirim.", "İnsanlar beni güçlü ve net biri olarak görür.", "Zayıflık göstermekten hoşlanmam.", "Korumacı bir yanım vardır.", "İstediğim şey için doğrudan mücadele ederim.", "Otorite karşısında boyun eğmek bana zor gelir.", "Bazen fazla sert veya baskın görünebilirim.", "Hayatta ayakta kalmak için güçlü olmak gerektiğini düşünürüm.",
+            // Tip 9 - Barışçıl
+            "Ortamda huzur ve uyum olmasını isterim.", "Çatışmadan mümkün olduğunca kaçınırım.", "Kendi isteklerimi geri plana atabilirim.", "İnsanlarla uyum içinde olmak benim için önemlidir.", "Karar vermekte bazen zorlanırım.", "Rahat, sakin ve kabullenici biri olarak görülürüm.", "Gergin ortamlarda geri çekilme eğilimim vardır.", "Önceliklerimi erteleyebilirim.", "İnsanları olduğu gibi kabul etmekte iyiyimdir.", "İç huzur benim için çok değerlidir."
+        ];
+
+        const typesInfo = {
+            1: { title: "Mükemmeliyetçi / Reformcu", tags: ["Düzen", "Doğruluk", "İlke", "Mükemmellik"], desc: "İşlerin doğru ve eksiksiz yapılması sizin için adeta bir içgüdüdür. Prensipli, ahlaklı ve idealist bir doğanız var. En iyi halinizde vizyoner ve bilge olursunuz.", compatible: [2, 7], relationAdvice: "Sorumluluklarınızı paylaşabilecek, sizi rahatlatacak ve hayattan daha fazla keyif almanızı sağlayacak, eğlenceli ve destekleyici partnerler sizin için idealdir. İlişkide mükemmeliyetçi tarafınızı esnetmeye çalışın." },
+            2: { title: "Yardımsever / Veren", tags: ["Yardım", "Sevgi", "Yakınlık", "İhtiyaç Duyulma"], desc: "Etrafınızdakilere destek olmak ve onların hayatına dokunmak sizi besler. Şefkatli ve sıcakkanlısınız. İnsanların ihtiyaçlarını hissetme konusunda çok özel bir antene sahipsiniz.", compatible: [4, 8], relationAdvice: "Sizin verici doğanızı suistimal etmeyecek, sınırlarınızı korumanıza yardımcı olacak derin ve koruyucu karakterler uygundur. Kendi ihtiyaçlarınızı dile getirmeyi ihmal etmeyin." },
+            3: { title: "Başaran / Performans Odaklı", tags: ["Başarı", "Görünürlük", "Performans", "Hedef"], desc: "Hırslı, pragmatik ve hedeflerine kilitlenmiş bir yapınız var. Toplum içinde başarılı ve iyi görünmeyi önemsersiniz. Motivasyonunuz ve pratik zekanız sayesinde liderlik vasıflarına sahipsiniz.", compatible: [6, 9], relationAdvice: "Sizi başarılarınız için değil, özünüz için sevecek ve kabullenecek; sadık ve huzur veren partnerler sizi dengeler. İş ile aşk arasında denge kurmaya özen gösterin." },
+            4: { title: "Bireyci / Özgün", tags: ["Özgünlük", "Derinlik", "Duygu", "Anlam"], desc: "Sıradanlığa tahammül edemeyen, derin, empatik ve estetik bir ruha sahipsiniz. Duygularınızı uçlarda yaşar ve 'anlam' arayışını hayatın merkezine koyarsınız.", compatible: [1, 2], relationAdvice: "Dalgalı ruh halinizi dengeleyecek ayakları yere basan (Tip 1) veya size koşulsuz şefkat sunacak (Tip 2) partnerlerle uyumu yakalarsınız. İlişkilerde elinizdekilere odaklanmayı öğrenin." },
+            5: { title: "Gözlemci / Araştırmacı", tags: ["Bilgi", "Analiz", "Mesafe", "Gözlem"], desc: "Keskin bir zekaya sahipsiniz. Dünyayı dışarıdan gözlemleyerek anlamayı ve bilginin gücüyle güvende hissetmeyi istersiniz. Bağımsızlığınıza ve kişisel alanınıza çok düşkünsünüz.", compatible: [1, 8], relationAdvice: "Sizin alan ihlali yapmadan gücünüzü dışarı çıkaracak aksiyon odaklı veya prensipli kişilerle verimli bir ilişki kurarsınız. İlişkinizde duygularınızı doğrudan paylaşmaya gayret edin." },
+            6: { title: "Sorgulayıcı / Güven Arayan", tags: ["Güven", "Sadakat", "Sorgulama", "Tedbir"], desc: "Sadık, adanmış ve tehlikeleri önceden sezme yeteneğine sahipsiniz. Güvenebileceğiniz yapılara ve insanlara ihtiyaç duyarsınız. Emin olduğunuzda harika bir takım oyuncusu olursunuz.", compatible: [9, 3], relationAdvice: "İçsel kaygılarınızı yatıştıracak, sakinleştiren (Tip 9) veya hedefe yönelik kararlılığı ile size güven aşılayan (Tip 3) partnerler uygundur. Güven duymayı ve akışa bırakmayı öğrenmek anahtardır." },
+            7: { title: "Maceracı / Hevesli", tags: ["Özgürlük", "Deneyim", "Neşe", "Çeşitlilik"], desc: "Dışa dönük, iyimser ve deneyim odaklısınız. Acıdan kaçınmak ve zihninizi hep olasılıklarla açık tutmak istersiniz. Enerjiniz etrafa neşe saçar ancak bağlanma korkunuz olabilir.", compatible: [1, 5], relationAdvice: "Hayalperest doğanızı topraklayacak (Tip 1) veya zihinsel derinliğiyle ilginizi hep canlı tutacak (Tip 5) partnerlerle dengelenirsiniz. İlişkide zorluklardan kaçmak yerine yüzleşmeyi deneyin." },
+            8: { title: "Meydan Okuyan / Güçlü", tags: ["Güç", "Kontrol", "Mücadele", "Koruma"], desc: "Güçlü, iddialı ve kendinden eminsiniz. Adalet duygunuz yüksektir ve zayıfları koruma içgüdüsüne sahipsiniz. Kontrolün sizde olmasını tercih eder ve zayıflık göstermekten nefret edersiniz.", compatible: [2, 9], relationAdvice: "Sizin dominant doğanızla çatışıp inatlaşmayacak, şefkatli (Tip 2) veya huzur verici (Tip 9) partnerlerle çok derin bir sevgi bağı kurabilirsiniz. Zayıf yanlarınızı da gösterebilmek aradaki bağı güçlendirir." },
+            9: { title: "Barışçıl / Uyumlu", tags: ["Uyum", "Barış", "Sakinlik", "Kabullenme"], desc: "Kabullenici, güven veren ve rahat bir yapınız var. Çevrenizde birleştirici bir güçsünüz ve çatışmalardan özenle kaçınırsınız. Huzuru sağlamak için adeta kendinizden vazgeçebilirsiniz.", compatible: [3, 6], relationAdvice: "Sizi ataletten kurtarıp harekete geçirecek (Tip 3) veya sağlamlık hissi ve sadakat verecek (Tip 6) partnerler sizin için uygundur. Kendi isteklerinizi dile getirmede daha cesur olun." }
+        };
+
+        const questionsObj = questionsData.map((text, idx) => ({
+            text: text,
+            type: Math.floor(idx / 10) + 1
+        }));
+
+        // Shuffle questions? Optional, but keeps it more accurate if mixed. Let's keep sequential for now or mix? 
+        // Sequential is fine, but mixing is better for psychological tests. Let's not mix to keep debugging simple, 
+        // or actually mix them so the user doesn't realize the pattern.
+        // Shuffle array
+        for (let i = questionsObj.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questionsObj[i], questionsObj[j]] = [questionsObj[j], questionsObj[i]];
+        }
+
+        // 2. STATE
+        let currentQIndex = 0;
+        let answers = new Array(90).fill(null); // stores 1-5
+        
+        // 3. CACHED DOM
+        const heroView = document.getElementById('hero-view');
+        const testView = document.getElementById('test-view');
+        const resultsView = document.getElementById('results-view');
+        
+        const qText = document.getElementById('question-text');
+        const qCounter = document.getElementById('question-counter');
+        const progressBar = document.getElementById('progress-bar');
+        
+        const optionBtns = document.querySelectorAll('.option-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const finishBtn = document.getElementById('finish-btn');
+        
+        // 4. LOGIC
+        document.getElementById('start-btn').addEventListener('click', () => {
+            heroView.classList.add('hidden-view');
+            testView.classList.remove('hidden-view');
+            loadQuestion();
+        });
+
+        function loadQuestion() {
+            const q = questionsObj[currentQIndex];
+            qText.innerText = q.text;
+            qCounter.innerText = `Soru ${currentQIndex + 1} / 90`;
+            progressBar.style.width = `${((currentQIndex + 1) / 90) * 100}%`;
+            
+            // Manage options
+            optionBtns.forEach(btn => btn.classList.remove('selected'));
+            if(answers[currentQIndex] !== null) {
+                const val = answers[currentQIndex];
+                document.querySelector(`.option-btn[data-value="${val}"]`).classList.add('selected');
+            }
+
+            // Manage buttons
+            prevBtn.disabled = currentQIndex === 0;
+            prevBtn.style.opacity = currentQIndex === 0 ? "0.5" : "1";
+            prevBtn.style.cursor = currentQIndex === 0 ? "not-allowed" : "pointer";
+
+            nextBtn.classList.add('hidden');
+            finishBtn.classList.add('hidden');
+
+            if(answers[currentQIndex] !== null) {
+                if(currentQIndex === 89) {
+                    finishBtn.classList.remove('hidden');
+                } else {
+                    nextBtn.classList.remove('hidden');
+                }
+            }
+        }
+
+        optionBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const val = parseInt(btn.getAttribute('data-value'));
+                answers[currentQIndex] = val;
+                
+                optionBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                
+                // Auto advance shortly after click
+                if(currentQIndex < 89) {
+                    setTimeout(() => goNext(), 300);
+                } else {
+                    finishBtn.classList.remove('hidden');
+                }
+            });
+        });
+
+        const goNext = () => {
+            if(currentQIndex < 89 && answers[currentQIndex] !== null) {
+                currentQIndex++;
+                loadQuestion();
+            }
+        };
+
+        const goPrev = () => {
+            if(currentQIndex > 0) {
+                currentQIndex--;
+                loadQuestion();
+            }
+        };
+
+        nextBtn.addEventListener('click', goNext);
+        prevBtn.addEventListener('click', goPrev);
+        
+        finishBtn.addEventListener('click', () => {
+            calculateResults();
+            testView.classList.add('hidden-view');
+            resultsView.classList.remove('hidden-view');
+            window.scrollTo(0,0);
+        });
+
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            currentQIndex = 0;
+            answers.fill(null);
+            resultsView.classList.add('hidden-view');
+            heroView.classList.remove('hidden-view');
+        });
+
+        function calculateResults() {
+            // Initiate scores 1-9
+            const scores = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 };
+            
+            for(let i=0; i<90; i++){
+                const qType = questionsObj[i].type;
+                scores[qType] += answers[i];
+            }
+
+            // Find max
+            let maxType = 1;
+            let maxScore = scores[1];
+
+            const scoresArray = [];
+
+            for(let t=1; t<=9; t++){
+                scoresArray.push({ type: t, score: scores[t] });
+                if(scores[t] > maxScore) {
+                    maxScore = scores[t];
+                    maxType = t;
+                }
+            }
+
+            // Fill UI with maxType info
+            const domInfo = typesInfo[maxType];
+            document.getElementById('res-type-num').innerText = `Tip ${maxType}`;
+            document.getElementById('res-type-title').innerText = domInfo.title;
+            document.getElementById('res-type-desc').innerText = domInfo.desc;
+            
+            const tagsHtml = domInfo.tags.map(tag => `<span class="px-3 py-1 rounded-full text-xs font-medium type-badge text-indigo-200">${tag}</span>`).join('');
+            document.getElementById('res-type-tags').innerHTML = tagsHtml;
+
+            document.getElementById('res-relationship-advice').innerText = domInfo.relationAdvice;
+
+            const partnersHtml = domInfo.compatible.map(pt => {
+                const partnerInfo = typesInfo[pt];
+                return `
+                <div class="bg-indigo-900/30 p-3 rounded-xl border border-indigo-500/20 flex items-center">
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-500/40 text-indigo-100 flex items-center justify-center font-bold text-sm mr-3">T${pt}</div>
+                    <div>
+                        <div class="text-white font-medium text-sm">${partnerInfo.title}</div>
+                        <div class="text-xs text-indigo-300">${partnerInfo.tags.slice(0,2).join(', ')}</div>
+                    </div>
+                </div>`;
+            }).join('');
+            document.getElementById('res-partner-types').innerHTML = partnersHtml;
+
+            // Sort scores array strictly descending
+            scoresArray.sort((a, b) => b.score - a.score);
+
+            const scoresContainer = document.getElementById('scores-container');
+            scoresContainer.innerHTML = '';
+            
+            scoresArray.forEach(item => {
+                // Max is 50, Min is 10
+                const percent = Math.max(0, ((item.score - 10) / 40) * 100);
+                const info = typesInfo[item.type];
+                const cleanTitle = info.title.split(' / ')[0]; // just get first part
+
+                scoresContainer.innerHTML += `
+                <div class="mb-3">
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="text-slate-300 font-medium font-bold">Tip ${item.type}: ${cleanTitle}</span>
+                        <span class="text-indigo-300 font-bold">${item.score} <span class="text-slate-500 font-normal">/ 50</span></span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-2 rounded-full" style="width: ${percent}%;"></div>
+                    </div>
+                </div>`;
+            });
+
+        }
+
+        // 5. THREE.JS BACKGROUND (Abstract Nodes/Network representing 9 types)
+        const initThreeJS = () => {
+            const canvasContainer = document.getElementById('canvas-container');
+            const scene = new THREE.Scene();
+            
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 30;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            canvasContainer.appendChild(renderer.domElement);
+
+            // Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 700;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for(let i=0; i < particlesCount * 3; i++) {
+                // spread particles around
+                posArray[i] = (Math.random() - 0.5) * 80;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            // Create a nice material
+            const material = new THREE.PointsMaterial({
+                size: 0.15,
+                color: 0x8b5cf6, // Purple-ish
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, material);
+            scene.add(particlesMesh);
+
+            // 9 Big Node Spheres representing Enneagram Types
+            const nodes = [];
+            const radius = 15;
+            const sphereGeo = new THREE.SphereGeometry(0.8, 32, 32);
+            
+            for(let i=0; i<9; i++) {
+                const angle = (i / 9) * Math.PI * 2;
+                const nodeMat = new THREE.MeshBasicMaterial({ 
+                    color: 0x6366f1, // Indigo
+                    transparent: true, 
+                    opacity: 0.6,
+                    wireframe: true
+                });
+                const sphere = new THREE.Mesh(sphereGeo, nodeMat);
+                sphere.position.x = Math.cos(angle) * radius;
+                sphere.position.y = Math.sin(angle) * radius + (Math.random() * 4 - 2); // sight variation
+                sphere.position.z = (Math.random() * 10 - 5);
+                scene.add(sphere);
+                nodes.push(sphere);
+            }
+
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            });
+
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsedTime = clock.getElapsedTime();
+
+                // Rotate particles slowly
+                particlesMesh.rotation.y = elapsedTime * 0.05;
+                particlesMesh.rotation.x = elapsedTime * 0.02;
+
+                // Move scene slightly based on mouse
+                scene.rotation.x += (mouseY * 0.1 - scene.rotation.x) * 0.05;
+                scene.rotation.y += (mouseX * 0.1 - scene.rotation.y) * 0.05;
+
+                // Animate nodes pulsing
+                nodes.forEach((node, i) => {
+                    node.rotation.x += 0.01;
+                    node.rotation.y += 0.01;
+                    const scale = 1 + Math.sin(elapsedTime * 2 + i) * 0.1;
+                    node.scale.set(scale, scale, scale);
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        };
+
+        // Initialize ThreeJS when loaded
+        if (typeof THREE !== 'undefined') {
+            initThreeJS();
+        } else {
+            console.error("Three.js limit aşıldı veya yüklenemedi.");
+        }
+
+    </script>
+</body>
+</html>
