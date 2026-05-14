@@ -1705,14 +1705,14 @@ body {
   margin-top: 1rem;
 }
 
-/* Terapi Hizmetleri sayfası */
-.terapi-cards-grid {
+/* Danışmanlık Hizmetleri sayfası */
+.danismanlik-cards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
 }
 
-.terapi-card {
+.danismanlik-card {
   padding: 2rem 1.75rem;
   background: var(--color-surface);
   border-radius: var(--radius-lg);
@@ -1723,7 +1723,7 @@ body {
   flex-direction: column;
 }
 
-.terapi-card__title {
+.danismanlik-card__title {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 1.85rem);
   font-weight: 600;
@@ -1732,20 +1732,20 @@ body {
   line-height: 1.25;
 }
 
-.terapi-card__intro {
+.danismanlik-card__intro {
   font-size: 1.05rem;
   color: var(--color-text-muted);
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
 
-.terapi-card__list {
+.danismanlik-card__list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.terapi-card__list li {
+.danismanlik-card__list li {
   position: relative;
   padding-left: 1.35rem;
   margin-bottom: 0.6rem;
@@ -1754,7 +1754,7 @@ body {
   line-height: 1.5;
 }
 
-.terapi-card__list li::before {
+.danismanlik-card__list li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -1765,12 +1765,12 @@ body {
   background: var(--color-primary);
 }
 
-.terapi-card__list li:last-child {
+.danismanlik-card__list li:last-child {
   margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
-  .terapi-cards-grid {
+  .danismanlik-cards-grid {
     grid-template-columns: 1fr;
   }
 }
